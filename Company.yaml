@@ -12,6 +12,8 @@
 #公司不让访问的国内媒体
 payload:
 
+
+  - DOMAIN-KEYWORD,.leijing.xyz
   - DOMAIN-SUFFIX,leijing.xyz
 
   
