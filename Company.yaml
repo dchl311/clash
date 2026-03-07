@@ -12,8 +12,8 @@
 #公司不让访问的国内媒体
 payload:
 
-  - DOMAIN-KEYWORD,leijing
   - DOMAIN-SUFFIX,leijing.xyz
+  - DOMAIN-SUFFIX,kdocs.cn
 
 # NAME: bilibili
   - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc31.ourdvsss.com
