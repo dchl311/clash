@@ -1,0 +1,15 @@
+#  - DOMAIN-SUFFIX,37swan.com
+#  - DOMAIN-KEYWORD,.leijing.xyz
+#  - DOMAIN,api.imem.app
+#  - IP-CIDR,139.59.210.98/32
+#  - PROCESS-NAME,nekox.messenger
+#  - DOMAIN-KEYWORD,twitter
+#
+#
+#
+#
+#
+#公司不让访问的国内媒体
+payload:
+  - DOMAIN-KEYWORD,.leijing.xyz
+  - DOMAIN-SUFFIX,leijing.xyz
