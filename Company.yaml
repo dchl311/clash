@@ -13,8 +13,11 @@
 payload:
 
 
-  - DOMAIN-KEYWORD,.leijing.xyz
+  - DOMAIN-KEYWORD,gitbook.io
+  - DOMAIN-KEYWORD,leijing
+  - DOMAIN-SUFFIX,gitbook.io
   - DOMAIN-SUFFIX,leijing.xyz
+
 
   
 # NAME: bilibili
