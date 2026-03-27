@@ -4,11 +4,6 @@
 #  - IP-CIDR,139.59.210.98/32
 #  - PROCESS-NAME,nekox.messenger
 #  - DOMAIN-KEYWORD,twitter
-#
-#
-#
-#
-#
 #公司不让访问的国内媒体
 payload:
 
@@ -17,6 +12,7 @@ payload:
   - DOMAIN-KEYWORD,leijing.xyz
   - DOMAIN-SUFFIX,gitbook.io
   - DOMAIN-SUFFIX,leijing.xyz
+  - DOMAIN-SUFFIX,qq.com
 
 
   
