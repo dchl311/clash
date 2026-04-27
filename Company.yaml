@@ -654,3 +654,5 @@ payload:
 
 payload:
   - DOMAIN-SUFFIX,guazi.com
+  - DOMAIN-SUFFIX,guazistatic.com
+  
