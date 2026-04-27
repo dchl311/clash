@@ -648,3 +648,9 @@ payload:
   - DOMAIN-SUFFIX,xunlei.net
   - PROCESS-NAME,Thunder
   - PROCESS-NAME,Thunder.exe
+
+
+# NAME: guazi
+
+payload:
+  - DOMAIN-SUFFIX,guazi.com
