@@ -15,67 +15,44 @@ payload:
   - DOMAIN-SUFFIX,qq.com
 
 
+# NAME: guazi
+
+payload:
+  - DOMAIN-SUFFIX,guazi.com
+  - DOMAIN-SUFFIX,guazistatic.com
+  
+# NAME: quark
+
+payload:
+  - DOMAIN-SUFFIX,quark.cn
+
+# NAME: herry-ai
+ 
+payload: 
+  - DOMAIN-SUFFIX,cherry-ai.com
+  
+  
+# NAME: taobao
+ 
+payload: 
+  - DOMAIN-SUFFIX,taobao.com
+
+# NAME: pinduoduo.com
+ 
+payload: 
+  - DOMAIN-SUFFIX,pinduoduo.com
+  - DOMAIN-SUFFIX,pddpic.com
+
+
+# NAME: haokan
+ 
+payload: 
+  - DOMAIN-KEYWORD,haokan
+  - DOMAIN-SUFFIX,hk.bdstatic.com
+  - DOMAIN-SUFFIX,vd4.bdstatic.com
   
 # NAME: bilibili
-  - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc31.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc3s.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjsgrzdrc3z.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjsgrzdrctt.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjsgrzdrctu.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjz8yzdnc31.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjz8yzdnc3t.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjzgazdrpba.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjzgazdrpbz.ourdvsss.com
-  - DOMAIN,0gr4uqmtt8y41hcjzgazdrpjt.ourdvsss.com
-  - DOMAIN,0gr5dgmttgha1hcj38yzdncb3.ourdvsss.com
-  - DOMAIN,112-81-125-43.dhost.00cdn.com
-  - DOMAIN,113-219-145-1.ksyungslb.com
-  - DOMAIN,114-236-92-129.ksyungslb.com
-  - DOMAIN,180-101-74-1.ksyungslb.com
-  - DOMAIN,1geadrmttge3nhcjwgazdope.ourdvsss.com
-  - DOMAIN,1geadrmttge3nhcjwgwzdqqe.ourdvsss.com
-  - DOMAIN,1gr3uomttgr31hcjo8yzdnco.ourdvsss.com
-  - DOMAIN,1gr3uomttgr31hcjo8yzdnpy.ourdvsss.com
-  - DOMAIN,1gr3uomttgr31hcjtgezdkcy.ourdvsss.com
-  - DOMAIN,1gr4uqmtt8y41hcjigazdqca.ourdvsss.com
-  - DOMAIN,1gr4uqmtt8y41hcjigazdqce.ourdvsss.com
-  - DOMAIN,1gr4uqmtt8y41hcjigazdqco.ourdvsss.com
-  - DOMAIN,1gr4uqmtt8y41hcjigazdqpo.ourdvsss.com
-  - DOMAIN,1gr4uqmtt8y41hcjzgwzdkqe.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdcca.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdcco.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdkca.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdkco.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdkpe.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdkpy.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj38yzdkqy.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj3gczdcpa.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj3gczdcpe.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj3gczdcpo.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcj3gczdcqy.ourdvsss.com
-  - DOMAIN,1gr5dgmttgha1hcttgrzdnpo.ourdvsss.com
-  - DOMAIN,1graukmttga4nhcjtgozdgce.ourdvsss.com
-  - DOMAIN,218-91-225-1.ksyungslb.com
-  - DOMAIN,219-155-150-1.ksyungslb.com
-  - DOMAIN,222-188-6-1.ksyungslb.com
-  - DOMAIN,36-104-134-1.ksyungslb.com
-  - DOMAIN,36-25-252-1.ksyungslb.com
-  - DOMAIN,3ge3drmttga5nhcbqge3ur.ourdvsss.com
-  - DOMAIN,3geauymtsgrzdnqbofa5do.ourdvsss.com
-  - DOMAIN,3geauymtsgrzdnqbofa5dy.ourdvsss.com
-  - DOMAIN,3geauymtsgrzdrcbzfahue.ourdvsss.com
-  - DOMAIN,3geauymtsgrzdrcbzfahuk.ourdvsss.com
-  - DOMAIN,4go41hcjtgazdoctqge4o.ourdvsss.com
-  - DOMAIN,p-bstarstatic.akamaized.net
-  - DOMAIN,p.bstarstatic.com
-  - DOMAIN,upos-bstar-mirrorakam.akamaized.net
-  - DOMAIN,upos-bstar1-mirrorakam.akamaized.net
-  - DOMAIN-SUFFIX,acg.tv
-  - DOMAIN-SUFFIX,acgvideo.com
-  - DOMAIN-SUFFIX,animetamashi.cn
-  - DOMAIN-SUFFIX,animetamashi.com
-  - DOMAIN-SUFFIX,anitama.cn
-  - DOMAIN-SUFFIX,anitama.net
+
   - DOMAIN-SUFFIX,b23.tv
   - DOMAIN-SUFFIX,baka.im
   - DOMAIN-SUFFIX,bigfun.cn
@@ -115,37 +92,8 @@ payload:
   - DOMAIN-SUFFIX,bilivideo.cn
   - DOMAIN-SUFFIX,bilivideo.com
   - DOMAIN-SUFFIX,bilivideo.net
-  - DOMAIN-SUFFIX,corari.com
-  - DOMAIN-SUFFIX,dreamcast.hk
-  - DOMAIN-SUFFIX,dyhgames.com
-  - DOMAIN-SUFFIX,hdslb.com
-  - DOMAIN-SUFFIX,hdslb.com.w.kunlunhuf.com
-  - DOMAIN-SUFFIX,hdslb.com.w.kunlunpi.com
-  - DOMAIN-SUFFIX,hdslb.net
-  - DOMAIN-SUFFIX,hdslb.org
-  - DOMAIN-SUFFIX,im9.com
-  - DOMAIN-SUFFIX,maoercdn.com
-  - DOMAIN-SUFFIX,mcbbs.net
-  - DOMAIN-SUFFIX,mincdn.com
-  - DOMAIN-SUFFIX,sharejoytech.com
-  - DOMAIN-SUFFIX,smtcdns.net
-  - DOMAIN-SUFFIX,upos-hz-mirrorakam.akamaized.net
-  - DOMAIN-SUFFIX,uposdash-302-bilivideo.yfcdn.net
-  - DOMAIN-SUFFIX,yo9.com
-  - IP-CIDR,106.75.74.76/32
-  - IP-CIDR,111.206.25.147/32
-  - IP-CIDR,119.3.238.64/32
-  - IP-CIDR,120.92.108.182/32
-  - IP-CIDR,120.92.113.99/32
-  - IP-CIDR,120.92.153.217/32
-  - IP-CIDR,134.175.207.130/32
-  - IP-CIDR,203.107.1.0/24
-  - PROCESS-NAME,com.bilibili.app.blue
-  - PROCESS-NAME,com.bilibili.app.in
-  - PROCESS-NAME,com.bilibili.comic
-  - PROCESS-NAME,com.bilibili.comic.intl
-  - PROCESS-NAME,tv.danmaku.bili
-  - PROCESS-NAME,tv.danmaku.bilibilihd
+
+
 
 # NAME: ChinaTelecom
 
@@ -159,11 +107,6 @@ payload:
   - DOMAIN-SUFFIX,21cnentmail.com
   - DOMAIN-SUFFIX,21cnimg.com
   - DOMAIN-SUFFIX,21cnsales.com
-  - DOMAIN-SUFFIX,360sides.cn
-  - DOMAIN-SUFFIX,360sides.com
-  - DOMAIN-SUFFIX,360sides.net
-  - DOMAIN-SUFFIX,4008100800.com
-  - DOMAIN-SUFFIX,8009900800.com
   - DOMAIN-SUFFIX,bnet.cn
   - DOMAIN-SUFFIX,chinabnet.cn
   - DOMAIN-SUFFIX,chinatelecom-h.com
@@ -234,12 +177,9 @@ payload:
   - DOMAIN-SUFFIX,yichuangyun.com.cn
 
 # NAME: TencentVideo
-  - DOMAIN,00713915daab0be43def5c338c02c80b.dlied1.cdntips.net
-  - DOMAIN,17caa75e77d31e1f5a7841e0b3374569.dlied1.cdntips.net
-  - DOMAIN,apd-pcdnvodstat.teg.tencent-cloud.net
+
   - DOMAIN,dldir1.qq.com
   - DOMAIN,iacc.qq.com
-  - DOMAIN,ins-eeww7kom.ias.tencent-cloud.net
   - DOMAIN,ios.video.mpush.qq.com
   - DOMAIN,rdelivery.qq.com
   - DOMAIN,ts.qq.com
@@ -256,35 +196,7 @@ payload:
   - IP-CIDR,58.49.111.117/32
   - IP-CIDR,58.49.111.79/32
   - IP-CIDR,58.49.111.95/32
-  - IP-CIDR6,::ffff:113.248.172.245/128
-  - IP-CIDR6,::ffff:114.235.96.186/128
-  - IP-CIDR6,::ffff:115.236.128.112/128
-  - IP-CIDR6,::ffff:115.236.128.120/128
-  - IP-CIDR6,::ffff:115.236.128.24/128
-  - IP-CIDR6,::ffff:115.236.128.80/128
-  - IP-CIDR6,::ffff:117.64.75.196/128
-  - IP-CIDR6,::ffff:117.68.200.210/128
-  - IP-CIDR6,::ffff:117.87.144.24/128
-  - IP-CIDR6,::ffff:121.56.126.255/128
-  - IP-CIDR6,::ffff:124.73.198.81/128
-  - IP-CIDR6,::ffff:124.73.200.142/128
-  - IP-CIDR6,::ffff:175.6.84.30/128
-  - IP-CIDR6,::ffff:175.6.84.96/128
-  - IP-CIDR6,::ffff:183.161.144.133/128
-  - IP-CIDR6,::ffff:183.161.144.230/128
-  - IP-CIDR6,::ffff:183.161.149.105/128
-  - IP-CIDR6,::ffff:198.18.5.138/128
-  - IP-CIDR6,::ffff:198.18.6.81/128
-  - IP-CIDR6,::ffff:198.18.6.83/128
-  - IP-CIDR6,::ffff:223.240.191.238/128
-  - IP-CIDR6,::ffff:27.157.209.46/128
-  - IP-CIDR6,::ffff:58.217.232.117/128
-  - IP-CIDR6,::ffff:58.217.232.68/128
-  - IP-CIDR6,::ffff:58.217.232.79/128
-  - IP-CIDR6,::ffff:58.58.0.90/128
-  - IP-CIDR6,::ffff:60.171.183.161/128
-  - IP-CIDR6,::ffff:60.171.183.186/128
-  - IP-CIDR6,::ffff:60.171.183.98/128
+
 
 # NAME: XiaoHongShu
 
@@ -313,264 +225,6 @@ payload:
   - DOMAIN-SUFFIX,zhishiu.com
   - DOMAIN-SUFFIX,zhishiv.com
   
-# NAME: Kingsoft
-
-  - DOMAIN-SUFFIX,35go.cn
-  - DOMAIN-SUFFIX,35go.net
-  - DOMAIN-SUFFIX,3ny8.com
-  - DOMAIN-SUFFIX,3r5y.com
-  - DOMAIN-SUFFIX,4848360.cn
-  - DOMAIN-SUFFIX,4848360.com
-  - DOMAIN-SUFFIX,51dzt.com
-  - DOMAIN-SUFFIX,78h34.com
-  - DOMAIN-SUFFIX,800wen.com
-  - DOMAIN-SUFFIX,93trf.com
-  - DOMAIN-SUFFIX,9724.com
-  - DOMAIN-SUFFIX,9724.com.cn
-  - DOMAIN-SUFFIX,ahjk34.com
-  - DOMAIN-SUFFIX,baobianli.cn
-  - DOMAIN-SUFFIX,baobianli.net
-  - DOMAIN-SUFFIX,baozengzhang.com
-  - DOMAIN-SUFFIX,beike.cn
-  - DOMAIN-SUFFIX,bestcloudcdn.com
-  - DOMAIN-SUFFIX,bestclouddns.com
-  - DOMAIN-SUFFIX,bk3r.com
-  - DOMAIN-SUFFIX,cheetahgames.com
-  - DOMAIN-SUFFIX,cheetahgo.net
-  - DOMAIN-SUFFIX,cheetahmobile.com
-  - DOMAIN-SUFFIX,cleanmaster.cn
-  - DOMAIN-SUFFIX,cmcloud.org
-  - DOMAIN-SUFFIX,cmcm.com
-  - DOMAIN-SUFFIX,cmcmadmin.com
-  - DOMAIN-SUFFIX,cmcmapp.com
-  - DOMAIN-SUFFIX,cmcmcdn.com
-  - DOMAIN-SUFFIX,cmcmcmai.com
-  - DOMAIN-SUFFIX,cmcmiot.com
-  - DOMAIN-SUFFIX,cmcmpc.com
-  - DOMAIN-SUFFIX,cmcmsecurity.com
-  - DOMAIN-SUFFIX,cmcmserv.com
-  - DOMAIN-SUFFIX,cmcmtrans.com
-  - DOMAIN-SUFFIX,cmdev.cn
-  - DOMAIN-SUFFIX,coh5.cn
-  - DOMAIN-SUFFIX,conew.cn
-  - DOMAIN-SUFFIX,conew.com
-  - DOMAIN-SUFFIX,crasheye.cn
-  - DOMAIN-SUFFIX,d4z1onkegyrs5.cloudfront.net
-  - DOMAIN-SUFFIX,d9j8.com
-  - DOMAIN-SUFFIX,dfig0.com
-  - DOMAIN-SUFFIX,dgk2n.com
-  - DOMAIN-SUFFIX,di28nl.com
-  - DOMAIN-SUFFIX,diffir.com
-  - DOMAIN-SUFFIX,djkhgy2.com
-  - DOMAIN-SUFFIX,djrhf0.com
-  - DOMAIN-SUFFIX,dkhg23.com
-  - DOMAIN-SUFFIX,docer.com
-  - DOMAIN-SUFFIX,douhuameiquan.cn
-  - DOMAIN-SUFFIX,douhuameiquan.com
-  - DOMAIN-SUFFIX,douhuameiquan.net
-  - DOMAIN-SUFFIX,drivergenius.com
-  - DOMAIN-SUFFIX,duba.com
-  - DOMAIN-SUFFIX,duba.net
-  - DOMAIN-SUFFIX,duojoy.cn
-  - DOMAIN-SUFFIX,dur9.com
-  - DOMAIN-SUFFIX,erg3r.com
-  - DOMAIN-SUFFIX,fatherai.com
-  - DOMAIN-SUFFIX,firefallgame.cn
-  - DOMAIN-SUFFIX,g768r.com
-  - DOMAIN-SUFFIX,gfh82.com
-  - DOMAIN-SUFFIX,global-ks-cdn.com
-  - DOMAIN-SUFFIX,h803w.com
-  - DOMAIN-SUFFIX,hd8y.com
-  - DOMAIN-SUFFIX,heytime.cn
-  - DOMAIN-SUFFIX,hid98ys.com
-  - DOMAIN-SUFFIX,hkd82.com
-  - DOMAIN-SUFFIX,iappsafe.cn
-  - DOMAIN-SUFFIX,iappsafe.com
-  - DOMAIN-SUFFIX,iciba.com
-  - DOMAIN-SUFFIX,iciba.net
-  - DOMAIN-SUFFIX,id4r.com
-  - DOMAIN-SUFFIX,id4r.net
-  - DOMAIN-SUFFIX,idaasksyun.com
-  - DOMAIN-SUFFIX,ifireeye.cn
-  - DOMAIN-SUFFIX,ifireeye.com
-  - DOMAIN-SUFFIX,ihuoyan.cn
-  - DOMAIN-SUFFIX,ihuoyan.com
-  - DOMAIN-SUFFIX,ijinshan.com
-  - DOMAIN-SUFFIX,ileopard.com
-  - DOMAIN-SUFFIX,ingags.com
-  - DOMAIN-SUFFIX,ishengdian.cn
-  - DOMAIN-SUFFIX,iuhtg8.com
-  - DOMAIN-SUFFIX,iweikan.cn
-  - DOMAIN-SUFFIX,ixiede.com
-  - DOMAIN-SUFFIX,j6n29.com
-  - DOMAIN-SUFFIX,jkhds872.com
-  - DOMAIN-SUFFIX,jksdhgu.com
-  - DOMAIN-SUFFIX,jxfeng.com
-  - DOMAIN-SUFFIX,jxphone.com
-  - DOMAIN-SUFFIX,jxsj2sy.com
-  - DOMAIN-SUFFIX,kcdnvip.com
-  - DOMAIN-SUFFIX,kdocs.cn
-  - DOMAIN-SUFFIX,keniu.cn
-  - DOMAIN-SUFFIX,kimg.cn
-  - DOMAIN-SUFFIX,kingcloud.com
-  - DOMAIN-SUFFIX,kingcloudad.com
-  - DOMAIN-SUFFIX,kingmb.cn
-  - DOMAIN-SUFFIX,kingmb.com
-  - DOMAIN-SUFFIX,kingmobi.cn
-  - DOMAIN-SUFFIX,kingsoft-office-service.com
-  - DOMAIN-SUFFIX,kingsoft.com
-  - DOMAIN-SUFFIX,kisops.com
-  - DOMAIN-SUFFIX,kjsdh6.com
-  - DOMAIN-SUFFIX,kmail.com
-  - DOMAIN-SUFFIX,ks-cdn.com
-  - DOMAIN-SUFFIX,ks-cdn1.com
-  - DOMAIN-SUFFIX,ks-cdnv6.com
-  - DOMAIN-SUFFIX,ks-live.com
-  - DOMAIN-SUFFIX,ksc-test.com
-  - DOMAIN-SUFFIX,kscbigdata.cloud
-  - DOMAIN-SUFFIX,kscloudapi.com
-  - DOMAIN-SUFFIX,ksdhgy.com
-  - DOMAIN-SUFFIX,kshwtj.com
-  - DOMAIN-SUFFIX,ksmobile.com
-  - DOMAIN-SUFFIX,ksmobile.net
-  - DOMAIN-SUFFIX,ksoapp.com
-  - DOMAIN-SUFFIX,ksops.com
-  - DOMAIN-SUFFIX,ksord.com
-  - DOMAIN-SUFFIX,ksosoft.com
-  - DOMAIN-SUFFIX,ksycdn.cn
-  - DOMAIN-SUFFIX,ksyna.com
-  - DOMAIN-SUFFIX,ksyun.com
-  - DOMAIN-SUFFIX,ksyun.net
-  - DOMAIN-SUFFIX,ksyunacc.cn
-  - DOMAIN-SUFFIX,ksyunad.com
-  - DOMAIN-SUFFIX,ksyuncdn-k1.com
-  - DOMAIN-SUFFIX,ksyuncdn-k2.com
-  - DOMAIN-SUFFIX,ksyuncdn.com
-  - DOMAIN-SUFFIX,ksyuncdnv6.com
-  - DOMAIN-SUFFIX,ksyuncs.com
-  - DOMAIN-SUFFIX,ksyungslb.com
-  - DOMAIN-SUFFIX,ksyungslb2.com
-  - DOMAIN-SUFFIX,ksyunv5.com
-  - DOMAIN-SUFFIX,ksyunv6.com
-  - DOMAIN-SUFFIX,ksyunv7.com
-  - DOMAIN-SUFFIX,ksyunwaf.com
-  - DOMAIN-SUFFIX,kuaipandata.com
-  - DOMAIN-SUFFIX,lbmobi.com
-  - DOMAIN-SUFFIX,liebao.cn
-  - DOMAIN-SUFFIX,liebao.org.cn
-  - DOMAIN-SUFFIX,liebaoh5.com
-  - DOMAIN-SUFFIX,liebaopay.com
-  - DOMAIN-SUFFIX,ljhks.com
-  - DOMAIN-SUFFIX,ljhks.net
-  - DOMAIN-SUFFIX,marshotspot.com
-  - DOMAIN-SUFFIX,myfiles.com.cn
-  - DOMAIN-SUFFIX,northgun.com
-  - DOMAIN-SUFFIX,oversea-ks-cdn.com
-  - DOMAIN-SUFFIX,papocket.com
-  - DOMAIN-SUFFIX,pc120.com
-  - DOMAIN-SUFFIX,prpracg.com
-  - DOMAIN-SUFFIX,q-supreme.cn
-  - DOMAIN-SUFFIX,q-supreme.com
-  - DOMAIN-SUFFIX,q78s5.com
-  - DOMAIN-SUFFIX,qinglidashi.com
-  - DOMAIN-SUFFIX,qwe1e.com
-  - DOMAIN-SUFFIX,qwps.cn
-  - DOMAIN-SUFFIX,qwps.com
-  - DOMAIN-SUFFIX,qwps.net
-  - DOMAIN-SUFFIX,r9t1.com
-  - DOMAIN-SUFFIX,rat3c.com
-  - DOMAIN-SUFFIX,ratingtoken.com.cn
-  - DOMAIN-SUFFIX,ratingtoken.net
-  - DOMAIN-SUFFIX,rubylink.cn
-  - DOMAIN-SUFFIX,s-zone.com
-  - DOMAIN-SUFFIX,s7y3.com
-  - DOMAIN-SUFFIX,safeapk.cn
-  - DOMAIN-SUFFIX,safeapp.cn
-  - DOMAIN-SUFFIX,sdg53.com
-  - DOMAIN-SUFFIX,sdhgu.com
-  - DOMAIN-SUFFIX,seasungame.com
-  - DOMAIN-SUFFIX,seasungames.com
-  - DOMAIN-SUFFIX,shangyouxuan.com
-  - DOMAIN-SUFFIX,shkdfua.com
-  - DOMAIN-SUFFIX,shoujikong.cn
-  - DOMAIN-SUFFIX,showshell.com
-  - DOMAIN-SUFFIX,skdj5.com
-  - DOMAIN-SUFFIX,skidstorm.com
-  - DOMAIN-SUFFIX,slja2.com
-  - DOMAIN-SUFFIX,snap-buy.com
-  - DOMAIN-SUFFIX,springen.cn
-  - DOMAIN-SUFFIX,supervisionus.com
-  - DOMAIN-SUFFIX,t4x3.com
-  - DOMAIN-SUFFIX,t79d6.com
-  - DOMAIN-SUFFIX,t7rt5.com
-  - DOMAIN-SUFFIX,tellbuy.cn
-  - DOMAIN-SUFFIX,testplus.cn
-  - DOMAIN-SUFFIX,typeeasy.cn
-  - DOMAIN-SUFFIX,typeeasy.net
-  - DOMAIN-SUFFIX,v78q.com
-  - DOMAIN-SUFFIX,wakaligong.com
-  - DOMAIN-SUFFIX,weikan.cn
-  - DOMAIN-SUFFIX,whwps.cn
-  - DOMAIN-SUFFIX,wps-h5.cn
-  - DOMAIN-SUFFIX,wps.cn
-  - DOMAIN-SUFFIX,wps.com
-  - DOMAIN-SUFFIX,wpscdn.cn
-  - DOMAIN-SUFFIX,wpscdn.com
-  - DOMAIN-SUFFIX,wpseco.cn
-  - DOMAIN-SUFFIX,wpsep.net
-  - DOMAIN-SUFFIX,wpsgo.com
-  - DOMAIN-SUFFIX,wpsit.cn
-  - DOMAIN-SUFFIX,wpske.cn
-  - DOMAIN-SUFFIX,wpske.com
-  - DOMAIN-SUFFIX,wpsmail.net
-  - DOMAIN-SUFFIX,wpspay.cn
-  - DOMAIN-SUFFIX,wpspdf.cn
-  - DOMAIN-SUFFIX,wpsplus.com
-  - DOMAIN-SUFFIX,wpsxiu.cn
-  - DOMAIN-SUFFIX,x3g1.com
-  - DOMAIN-SUFFIX,xiaobaobianli.cn
-  - DOMAIN-SUFFIX,xiaobaobianli.com
-  - DOMAIN-SUFFIX,xiaobaobianli.net
-  - DOMAIN-SUFFIX,xindexuexi.cn
-  - DOMAIN-SUFFIX,xindexuexi.com
-  - DOMAIN-SUFFIX,xishanju.com
-  - DOMAIN-SUFFIX,xiutang01.cn
-  - DOMAIN-SUFFIX,xiutang02.cn
-  - DOMAIN-SUFFIX,xiutang03.cn
-  - DOMAIN-SUFFIX,xiutang04.cn
-  - DOMAIN-SUFFIX,xiutang05.cn
-  - DOMAIN-SUFFIX,xiutang06.cn
-  - DOMAIN-SUFFIX,xiutang07.cn
-  - DOMAIN-SUFFIX,xiutang08.cn
-  - DOMAIN-SUFFIX,xiutang09.cn
-  - DOMAIN-SUFFIX,xiutang10.cn
-  - DOMAIN-SUFFIX,xiutang11.cn
-  - DOMAIN-SUFFIX,xiutang12.cn
-  - DOMAIN-SUFFIX,xiutang13.cn
-  - DOMAIN-SUFFIX,xiutang14.cn
-  - DOMAIN-SUFFIX,xiutang15.cn
-  - DOMAIN-SUFFIX,xiutang16.cn
-  - DOMAIN-SUFFIX,xiutang17.cn
-  - DOMAIN-SUFFIX,xiutang18.cn
-  - DOMAIN-SUFFIX,xiutang19.cn
-  - DOMAIN-SUFFIX,xiutang20.cn
-  - DOMAIN-SUFFIX,xiutangh5.cn
-  - DOMAIN-SUFFIX,xoyo.com
-  - DOMAIN-SUFFIX,xoyobox.com
-  - DOMAIN-SUFFIX,xoyocdn.com
-  - DOMAIN-SUFFIX,xsjcs.cn
-  - DOMAIN-SUFFIX,xsjom.com
-  - DOMAIN-SUFFIX,y78r.com
-  - DOMAIN-SUFFIX,yingyongso.com
-  - DOMAIN-SUFFIX,yk72e.com
-  - DOMAIN-SUFFIX,yt98w.com
-  - DOMAIN-SUFFIX,z211.top
-  - DOMAIN-SUFFIX,z211.vip
-  - DOMAIN-SUFFIX,zhishifanli.cn
-  - DOMAIN-SUFFIX,zhishifanli.com
-  - DOMAIN-SUFFIX,zhishifanli.com.cn
-  - DOMAIN-SUFFIX,zj8t5.com
-  - DOMAIN-SUFFIX,znstartups.com
 
 
 # NAME: Youku
@@ -648,26 +302,3 @@ payload:
   - DOMAIN-SUFFIX,xunlei.net
   - PROCESS-NAME,Thunder
   - PROCESS-NAME,Thunder.exe
-
-
-# NAME: guazi
-
-payload:
-  - DOMAIN-SUFFIX,guazi.com
-  - DOMAIN-SUFFIX,guazistatic.com
-  
-# NAME: quark
-
-payload:
-  - DOMAIN-SUFFIX,quark.cn
-
-# NAME: herry-ai
- 
-payload: 
-  - DOMAIN-SUFFIX,cherry-ai.com
-  
-  
-# NAME: taobao
- 
-payload: 
-  - DOMAIN-SUFFIX,taobao.com
