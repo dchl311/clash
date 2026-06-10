@@ -15,6 +15,12 @@ payload:
   - DOMAIN-SUFFIX,qq.com
 
 
+# NAME: 汽车之家
+
+payload:
+  - DOMAIN-SUFFIX,autohome.com.cn
+  - DOMAIN-SUFFIX,autoimg.cn
+
 # NAME: guazi
 
 payload:
