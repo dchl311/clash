@@ -14,7 +14,12 @@ payload:
   - DOMAIN-SUFFIX,leijing.xyz
   - DOMAIN-SUFFIX,qq.com
 
+# NAME: 京东
 
+payload:
+  - DOMAIN-SUFFIX,jd.com
+  - DOMAIN-SUFFIX,360buyimg.com
+  
 # NAME: 汽车之家
 
 payload:
