@@ -2,7 +2,7 @@
 // @name               PikPak 增强大师 (iPhone版)
 // @name:zh-CN         PikPak 增强大师 (iPhone版)
 // @namespace          https://github.com/dchl311/
-// @version            3.1.5
+// @version            3.1.6
 // @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
@@ -1601,7 +1601,8 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
     gap: 8px !important;
     box-sizing: border-box !important;
   }
-  .pk-grid-hd:not(.pk-grid-view-hd) > div, .pk-row:not(.pk-grid-card-row) > div {
+  .pk-grid-hd:not(.pk-grid-view-hd) > div:not([data-k="path"]):not([data-k="duration"]):not([data-k="modified_time"]):not([data-k="play_time"]):not([data-k="view_count"]):not([data-k="save_count"]):not([data-k="share_status"]):not([data-k="offline_status"]):not([data-k="offline_progress"]),
+  .pk-row:not(.pk-grid-card-row) > div {
     display: flex !important;
     align-items: center !important;
     box-sizing: border-box !important;
@@ -1629,19 +1630,32 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
     flex: 1 1 0% !important;
     min-width: 0 !important;
   }
-  /* Size column (immediately following name) */
-  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="name"] + div,
-  .pk-row:not(.pk-grid-card-row) > .pk-name + div {
-    width: 60px !important;
-    flex: 0 0 60px !important;
+  /* Size column (visible by default) */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="size"],
+  .pk-row:not(.pk-grid-card-row) > .pk-size {
+    display: flex !important;
+    width: 68px !important;
+    flex: 0 0 68px !important;
     justify-content: flex-end !important;
     text-align: right !important;
     margin-left: auto !important;
   }
-  /* Hide all other columns after size/first meta column */
-  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="name"] + div ~ div,
-  .pk-row:not(.pk-grid-card-row) > .pk-name + div ~ div,
-  .pk-col[data-k="modified_time"], .pk-col[data-k="duration"], .pk-col[data-k="path"],
+  /* Path column (visible conditionally in search/flattened/dup mode) */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="path"],
+  .pk-row:not(.pk-grid-card-row) > .pk-path {
+    display: flex !important;
+    width: 68px !important;
+    flex: 0 0 68px !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
+    margin-left: auto !important;
+  }
+  /* Hide all other columns on mobile */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="size"] ~ div,
+  .pk-row:not(.pk-grid-card-row) > .pk-size ~ div,
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="path"] ~ div,
+  .pk-row:not(.pk-grid-card-row) > .pk-path ~ div,
+  .pk-col[data-k="modified_time"], .pk-col[data-k="duration"],
   .pk-col[data-k="play_time"], .pk-col[data-k="view_count"], .pk-col[data-k="save_count"],
   .pk-col[data-k="share_status"] {
     display: none !important;
@@ -18823,10 +18837,10 @@ ${iconImg}
 <span class="pk-name-txt">${nameDisplay}</span>
 </div>`;
 
-html += `<div>${fmtSize(d.size)}</div>`;
+html += `<div class="pk-size">${fmtSize(d.size)}</div>`;
 
 const displayDur = d._history_duration || d.params?.duration || 0;
-html += `<div>${displayDur > 0 ? fmtDur(displayDur) : '-'}</div>`;
+html += `<div class="pk-dur">${displayDur > 0 ? fmtDur(displayDur) : '-'}</div>`;
 
 let progressHtml = '-';
 const curT = Math.max(0, Math.round(Number(d._history_progress || 0)));
@@ -18854,7 +18868,7 @@ playTimeStr = fmtDate(new Date(d._history_ts).toISOString());
 } else {
 playTimeStr = "-";
 }
-html += `<div style="color:var(--pk-fg); font-weight:normal;">${playTimeStr}</div>`;
+html += `<div class="pk-date" style="color:var(--pk-fg); font-weight:normal;">${playTimeStr}</div>`;
 
 } else if (S.offlineMode) {
 let iconImg = getDynamicIcon(d);
@@ -18878,7 +18892,7 @@ ${iconImg}
 <span class="pk-name-txt" style="${nameStyle}">${nameDisplay}</span>
 </div>`;
 
-html += `<div>${fmtSize(d.size)}</div>`;
+html += `<div class="pk-size">${fmtSize(d.size)}</div>`;
 
 let statusColor = 'var(--pk-fg)';
 let statusText = d.phase;
@@ -18943,7 +18957,7 @@ ${getDynamicIcon(d)}
 <span class="pk-name-txt" style="margin:0!important; padding:0!important; line-height:1.5; ${nameStyle}">${nameDisplay}</span>
 </div>`;
 
-html += `<div>${fmtSize(d.size)}</div>`;
+html += `<div class="pk-size">${fmtSize(d.size)}</div>`;
 html += `<div class="pk-up-spd">${(d.status === 'UPLOADING' && S.upMng) ? S.upMng.fmtSpeed(d.speed) : '-'}</div>`;
 
 let statusColor = '#888';
@@ -19300,7 +19314,7 @@ html += `<div class="pk-path" style="font-size:12px; overflow:hidden; text-overf
 }
 
 const displaySize = (d.kind === 'drive#folder' && !S.analyzeMode) ? '-' : fmtSize(d.size);
-html += `<div>${displaySize}</div>`;
+html += `<div class="pk-size">${displaySize}</div>`;
 
 if (!isAnalyzeRoot) {
 const isFolder = d.kind === 'drive#folder';
@@ -19362,11 +19376,11 @@ if (isFolder) {
     }
 }
 
-html += `<div data-pk-tip="${durHtml}">${durHtml}</div>`;
+html += `<div class="pk-dur" data-pk-tip="${durHtml}">${durHtml}</div>`;
 }
 
 const dateTxt = S.trashMode ? getRemainingDays(d) : fmtDate(d.modified_time);
-html += `<div data-pk-tip="${dateTxt}">${dateTxt}</div>`;
+html += `<div class="pk-date" data-pk-tip="${dateTxt}">${dateTxt}</div>`;
 }
 
 
