@@ -2,7 +2,7 @@
 // @name               PikPak 增强大师 (iPhone版)
 // @name:zh-CN         PikPak 增强大师 (iPhone版)
 // @namespace          https://github.com/dchl311/
-// @version            3.1.1
+// @version            3.1.2
 // @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
@@ -850,8 +850,10 @@ html.pk-txt-preview-fullscreen-lock, body.pk-txt-preview-fullscreen-lock { overf
 .pk-vp::-webkit-scrollbar-thumb:hover, .pk-modal::-webkit-scrollbar-thumb:hover, .pk-prev-list::-webkit-scrollbar-thumb:hover, .pk-scroll::-webkit-scrollbar-thumb:hover { background: var(--pk-sb-hov); } ::-webkit-scrollbar { cursor: default; }
 .pk-vp { flex: 1; overflow-y: auto; position: relative; background: var(--pk-bg); scrollbar-gutter: stable; }
 .pk-in { position: absolute; width: 100%; top: 0; }
-.pk-row { height: 40px; border: 1px solid transparent; cursor: default; padding: 0 16px; border-radius: 4px; }
+.pk-row { height: 40px; border: 1px solid transparent; cursor: default; padding: 0 16px; border-radius: 4px; contain: layout paint; }
 .pk-row:hover { background: var(--pk-hl); }
+.pk-preview-row { transition: background 0.1s; }
+.pk-preview-row:hover { background-color: var(--pk-hl) !important; }
 .pk-row.sel { background: var(--pk-sel-bg); border: 1px solid transparent; }
 .pk-row.sel.pk-focused { border: 1px solid var(--pk-pri); border-radius: 4px; }
 .pk-grid-view .pk-row.sel.pk-focused { border-color: var(--pk-pri); box-shadow: 0 0 0 1px var(--pk-pri); border-radius: 16px; }
@@ -1629,6 +1631,16 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
     width: 90% !important;
     max-width: 95% !important;
     padding: 16px !important;
+  }
+  .pk-vp, .pk-scroll, .pk-modal, .pk-prev-list, .pk-bl-area, .pk-settings-modal-body, #pk-rn-vp, .pk-sub-pane, #pk_sub_search_list, .pk-p-pop, .pk-share-modal {
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .pk-btn, button, #pk-launch, .pk-nav-btn, .pk-grp-chk, input[type="checkbox"], input[type="radio"], select, .pk-tab-item, .pk-action-btn {
+    touch-action: manipulation !important;
+  }
+  .pk-vp, .pk-modal, .pk-settings-modal-inner {
+    transform: translate3d(0,0,0) !important;
+    backface-visibility: hidden !important;
   }
 }
 `;
@@ -7686,7 +7698,27 @@ return S.display[targetIdx]?.id || fallbackId;
 const targetIdx = Math.max(0, Math.min(S.display.length - 1, Math.floor(centerY / Math.max(1, CONF.rowHeight))));
 return S.display[targetIdx]?.id || fallbackId;
 };
-const syncLayoutMetrics = () => { CONF.rowHeight = isGridView() ? getGridCardHeight() : getListRowHeight(); };
+const syncLayoutMetrics = () => {
+CONF.rowHeight = isGridView() ? getGridCardHeight() : getListRowHeight();
+if (UI.win) {
+const isMax = UI.win.classList.contains('pk-maximized');
+const charWidth = isMax ? 9.2 : 8;
+const nameColEl = UI.win.querySelector('.pk-grid-hd .pk-col[data-k="name"]');
+if (nameColEl) {
+S._cachedNameColWidth = nameColEl.offsetWidth;
+S._cachedCharCapacity = Math.floor((S._cachedNameColWidth - 80) / charWidth);
+} else {
+S._cachedNameColWidth = null;
+}
+const pathColEl = UI.win.querySelector('.pk-grid-hd .pk-col[data-k="path"]');
+if (pathColEl) {
+S._cachedPathColWidth = pathColEl.offsetWidth;
+S._cachedPathCharCapacity = Math.floor((S._cachedPathColWidth - 20) / charWidth);
+} else {
+S._cachedPathColWidth = null;
+}
+}
+};
 const getGridLayoutKey = () => {
 const vpRect = getLogicalRect(UI.vp || UI.in);
 const vpWidth = Math.max(0, Math.floor((vpRect && vpRect.width) || UI.vp?.clientWidth || 0));
@@ -8129,7 +8161,7 @@ window.pkThumbTriState.file[item.id] = 'probing';
 const imgOpacity = fileThumbState === 'ok' ? '1' : '0';
 const baseOpacity = fileThumbState === 'ok' ? '0' : '1';
 
-return `<div style="position:relative;width:100%;height:100%;" data-pk-thumb-ready="${fileThumbState === 'ok' ? '1' : '0'}">${makeFileFallbackHtml(baseOpacity)}<img src="${fileResolvedSrc}" class="pk-max-thumb" draggable="false" data-pk-id="${item.id}" data-pk-src="${fileResolvedSrc}" data-pk-frozen-cover="1" style="position:absolute;inset:0;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:cover !important;border-radius:0 !important;z-index:2;opacity:${imgOpacity};transition:opacity .18s ease;" onload="const ok=(this.naturalWidth>1||this.naturalHeight>1);const wrap=this.parentElement;const card=this.closest('.pk-grid-card-body');const play=card&&card.querySelector('.pk-gv-play');if(ok){if(wrap)wrap.dataset.pkThumbReady='1';if(this.dataset.pkId&&this.dataset.pkSrc&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'ok',this.dataset.pkSrc);}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='ok';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)window.pkGridMediaStore.file[this.dataset.pkId]=this.dataset.pkSrc||'';}this.style.opacity='1';if(this.previousElementSibling)this.previousElementSibling.style.opacity='0';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);}else{if(wrap)wrap.dataset.pkThumbReady='0';if(this.dataset.pkId&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'fail');}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='fail';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)delete window.pkGridMediaStore.file[this.dataset.pkId];}if(this.previousElementSibling)this.previousElementSibling.style.opacity='1';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);this.remove();}" onerror="const wrap=this.parentElement;const card=this.closest('.pk-grid-card-body');const play=card&&card.querySelector('.pk-gv-play');if(wrap)wrap.dataset.pkThumbReady='0';if(this.dataset.pkId&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'fail');}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='fail';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)delete window.pkGridMediaStore.file[this.dataset.pkId];}if(this.previousElementSibling)this.previousElementSibling.style.opacity='1';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);this.remove();"></div>`;
+return `<div style="position:relative;width:100%;height:100%;" data-pk-thumb-ready="${fileThumbState === 'ok' ? '1' : '0'}">${makeFileFallbackHtml(baseOpacity)}<img src="${fileResolvedSrc}" decoding="async" class="pk-max-thumb" draggable="false" data-pk-id="${item.id}" data-pk-src="${fileResolvedSrc}" data-pk-frozen-cover="1" style="position:absolute;inset:0;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;object-fit:cover !important;border-radius:0 !important;z-index:2;opacity:${imgOpacity};transition:opacity .18s ease;" onload="const ok=(this.naturalWidth>1||this.naturalHeight>1);const wrap=this.parentElement;const card=this.closest('.pk-grid-card-body');const play=card&&card.querySelector('.pk-gv-play');if(ok){if(wrap)wrap.dataset.pkThumbReady='1';if(this.dataset.pkId&&this.dataset.pkSrc&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'ok',this.dataset.pkSrc);}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='ok';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)window.pkGridMediaStore.file[this.dataset.pkId]=this.dataset.pkSrc||'';}this.style.opacity='1';if(this.previousElementSibling)this.previousElementSibling.style.opacity='0';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);}else{if(wrap)wrap.dataset.pkThumbReady='0';if(this.dataset.pkId&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'fail');}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='fail';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)delete window.pkGridMediaStore.file[this.dataset.pkId];}if(this.previousElementSibling)this.previousElementSibling.style.opacity='1';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);this.remove();}" onerror="const wrap=this.parentElement;const card=this.closest('.pk-grid-card-body');const play=card&&card.querySelector('.pk-gv-play');if(wrap)wrap.dataset.pkThumbReady='0';if(this.dataset.pkId&&window.markStableFileMediaState){window.markStableFileMediaState(this.dataset.pkId,'fail');}else if(window.pkThumbTriState&&window.pkThumbTriState.file&&this.dataset.pkId){window.pkThumbTriState.file[this.dataset.pkId]='fail';if(window.pkGridMediaStore&&window.pkGridMediaStore.file)delete window.pkGridMediaStore.file[this.dataset.pkId];}if(this.previousElementSibling)this.previousElementSibling.style.opacity='1';if(window.syncGridVideoPlayState)window.syncGridVideoPlayState(card);this.remove();"></div>`;
 }
 
 return makeFileFallbackHtml();
@@ -10395,10 +10427,8 @@ for (let i = start; i < end; i++) {
 const mMatch = matches[i];
 const row = document.createElement('div');
 row.dataset.id = mMatch.item.id;
-row.style.cssText = `position:absolute; top:${i * ROW_HEIGHT}px; width:100%; display:grid; grid-template-columns: 40px 50px 1fr 1fr; padding:0; border-bottom:1px dashed var(--pk-bd); font-size:13px; align-items:center; height:${ROW_HEIGHT}px; transition:background 0.1s; cursor:pointer;`;
-
-row.onmouseover = () => row.style.backgroundColor = 'var(--pk-hl)';
-row.onmouseout = () => row.style.backgroundColor = 'transparent';
+row.className = 'pk-preview-row';
+row.style.cssText = `position:absolute; top:${i * ROW_HEIGHT}px; width:100%; display:grid; grid-template-columns: 40px 50px 1fr 1fr; padding:0; border-bottom:1px dashed var(--pk-bd); font-size:13px; align-items:center; height:${ROW_HEIGHT}px; cursor:pointer; contain:layout paint;`;
 
 const isFolder = mMatch.type === 'FOLDER';
 const it = mMatch.item;
@@ -10442,7 +10472,7 @@ const usableCover = hasCover && !isPreviewIconFailed(it.thumbnail_link);
 const fallbackSvg = getIcon(it).replace(/width="\d+"/, 'width="24"').replace(/height="\d+"/, 'height="24"');
 const makePreviewImg = (src, fit, radius = '0') => {
 const safeSrc = String(src || '').replace(/"/g, '&quot;');
-return `<img data-pk-preview-src="${safeSrc}" src="${safeSrc}" style="width:24px;height:24px;object-fit:${fit};border-radius:${radius};flex-shrink:0;">`;
+return `<img data-pk-preview-src="${safeSrc}" src="${safeSrc}" decoding="async" style="width:24px;height:24px;object-fit:${fit};border-radius:${radius};flex-shrink:0;">`;
 };
 let iconHtml = '';
 
@@ -17454,8 +17484,10 @@ row._pkUsedThisPass = true;
 return row;
 };
 
-let nameColWidth = 400;
-let charCapacity = 50;
+let nameColWidth = S._cachedNameColWidth;
+let charCapacity = S._cachedCharCapacity;
+let pathColWidth = S._cachedPathColWidth;
+let pathCharCapacity = S._cachedPathCharCapacity;
 
 const pathIds = S.path.map(p => p.id);
 const isAtGlobalSearchRoot = pathIds[pathIds.length - 1] === 'virtual_search_root';
@@ -17463,18 +17495,34 @@ const isGlobalSearchHistoryPresent = pathIds.includes('virtual_search_root');
 
 const shouldShowHl = (!!S.search && (!isGlobalSearchHistoryPresent || isAtGlobalSearchRoot));
 
-let pathColWidth = 200, pathCharCapacity = 30;
+if (nameColWidth === undefined || nameColWidth === null || pathColWidth === undefined || pathColWidth === null) {
 if (UI.win) {
 const charWidth = isMax ? 9.2 : 8;
 const nameColEl = UI.win.querySelector('.pk-grid-hd .pk-col[data-k="name"]');
 if (nameColEl) {
 nameColWidth = nameColEl.offsetWidth;
 charCapacity = Math.floor((nameColWidth - 80) / charWidth);
+S._cachedNameColWidth = nameColWidth;
+S._cachedCharCapacity = charCapacity;
+} else {
+nameColWidth = 400;
+charCapacity = 50;
 }
 const pathColEl = UI.win.querySelector('.pk-grid-hd .pk-col[data-k="path"]');
 if (pathColEl) {
 pathColWidth = pathColEl.offsetWidth;
 pathCharCapacity = Math.floor((pathColWidth - 20) / charWidth);
+S._cachedPathColWidth = pathColWidth;
+S._cachedPathCharCapacity = pathCharCapacity;
+} else {
+pathColWidth = 200;
+pathCharCapacity = 30;
+}
+} else {
+nameColWidth = 400;
+charCapacity = 50;
+pathColWidth = 200;
+pathCharCapacity = 30;
 }
 }
 
@@ -18411,7 +18459,7 @@ const isBlur = isBlurEnabledForView(isGridView() ? 'grid' : 'list');
 if (isMax && isBlur) {
 const fallbackSvg = iconHtml.replace(/"/g, "&quot;").replace(/\n/g, "");
 return `<div class="pk-max-icon-box" style="${boxStyle}">
-    <img src="${item.icon_link}" style="${imgStyle} opacity:1; object-fit:contain;" draggable="false"
+    <img src="${item.icon_link}" decoding="async" style="${imgStyle} opacity:1; object-fit:contain;" draggable="false"
             onerror="this.outerHTML='<div class=&quot;pk-placeholder-layer&quot; style=&quot;${placeholderStyle} opacity:1;&quot;>${fallbackSvg}</div>'">
     ${blHtml}
 </div>`;
@@ -18427,7 +18475,7 @@ const badgeOp = (isFolderLike && isCached) ? '1' : '0';
 
 let badgeHtml = '';
 if (isFolderLike) {
-    const innerContent = `<img src="${item.icon_link}" style="width:16px; height:16px; object-fit:contain; display:block;">`;
+    const innerContent = `<img src="${item.icon_link}" decoding="async" style="width:16px; height:16px; object-fit:contain; display:block;">`;
     badgeHtml = `<div class="pk-folder-badge" style="${badgeStyle} opacity: ${badgeOp};">${innerContent}</div>`;
 }
 
@@ -18445,8 +18493,9 @@ if (isVideo) {
 
 return `
         <div class="pk-max-icon-box" style="${boxStyle}">
-            <div class="pk-placeholder-layer" style="${placeholderStyle} opacity: ${phOp};"><img src="${item.icon_link}" style="width:50px; height:50px; object-fit:contain;"></div>
+            <div class="pk-placeholder-layer" style="${placeholderStyle} opacity: ${phOp};"><img src="${item.icon_link}" decoding="async" style="width:50px; height:50px; object-fit:contain;"></div>
             <img src="${item.thumbnail_link}"
+                    decoding="async"
                     class="pk-max-thumb"
                     style="${imgStyle} opacity: ${imgOp};"
                     draggable="false">
@@ -18462,14 +18511,14 @@ if (hasValidCover) {
     const showBadge = isFolder || item._isFolderLike || (item.icon_link && item.icon_link.includes('folder'));
     let badgeHtml = '';
     if (showBadge) {
-        const innerIcon = `<img src="${item.icon_link}" style="width:16px; height:16px; object-fit:contain; display:block;">`;
+        const innerIcon = `<img src="${item.icon_link}" decoding="async" style="width:16px; height:16px; object-fit:contain; display:block;">`;
         badgeHtml = `<div class="pk-folder-badge" style="${badgeStyle} opacity:1;">${innerIcon}</div>`;
     }
 
     return `
         <div class="pk-max-icon-box" style="${boxStyle}">
-            <div class="pk-placeholder-layer" style="${placeholderStyle} opacity:0;"><img src="${item.icon_link}" style="width:50px;height:50px;object-fit:contain;"></div>
-            <img src="${item.thumbnail_link}" class="pk-max-thumb" style="${imgStyle} opacity:1;" draggable="false">
+            <div class="pk-placeholder-layer" style="${placeholderStyle} opacity:0;"><img src="${item.icon_link}" decoding="async" style="width:50px;height:50px;object-fit:contain;"></div>
+            <img src="${item.thumbnail_link}" decoding="async" class="pk-max-thumb" style="${imgStyle} opacity:1;" draggable="false">
             ${badgeHtml}
             ${blHtml}
         </div>
@@ -18477,7 +18526,7 @@ if (hasValidCover) {
 }
 const finalIconSrc = item.icon_link || item.thumbnail_link;
 if (finalIconSrc) {
-    return `<div class="pk-max-icon-box" style="${boxStyle}"><img src="${finalIconSrc}" style="width:50px; height:50px; object-fit:contain;" onerror="this.outerHTML='<div style=&quot;transform:translateX(-6px);display:flex;&quot;>${iconHtml.replace(/"/g, "&quot;").replace(/\n/g, "")}</div>'">${blHtml}</div>`;
+    return `<div class="pk-max-icon-box" style="${boxStyle}"><img src="${finalIconSrc}" decoding="async" style="width:50px; height:50px; object-fit:contain;" onerror="this.outerHTML='<div style=&quot;transform:translateX(-6px);display:flex;&quot;>${iconHtml.replace(/"/g, "&quot;").replace(/\n/g, "")}</div>'">${blHtml}</div>`;
 }
 return `<div class="pk-max-icon-box" style="${boxStyle}"><div style="transform: translateX(-6px); display:flex;">${iconHtml}</div>${blHtml}</div>`;
 }
@@ -18492,11 +18541,11 @@ const isCached = window.pkGlobalThumbCache.has(item.id);
 const phOp = isCached ? '0' : '1';
 const imgOp = isCached ? '1' : '0';
 
-const placeholder = item.icon_link ? `<img src="${item.icon_link}" style="width:100%;height:100%;object-fit:contain;border-radius:4px;pointer-events:none;">` : iconHtml;
+const placeholder = item.icon_link ? `<img src="${item.icon_link}" decoding="async" style="width:100%;height:100%;object-fit:contain;border-radius:4px;pointer-events:none;">` : iconHtml;
 return `<div class="pk-min-media-box" style="width:24px;height:24px;margin-right:12px;position:relative;flex-shrink:0;display:inline-flex;vertical-align:middle;overflow:visible !important;border-radius:4px;">
     <div style="position:absolute;inset:0;overflow:hidden;border-radius:4px;z-index:1;">
         <div class="pk-min-ph" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;transition:opacity 0.2s;opacity:${phOp};">${placeholder}</div>
-        <img src="${item.thumbnail_link}" class="pk-min-thumb" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:${imgOp};z-index:2;transition:opacity 0.2s;"
+        <img src="${item.thumbnail_link}" decoding="async" class="pk-min-thumb" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:${imgOp};z-index:2;transition:opacity 0.2s;"
                 onload="if(window.pkGlobalThumbCache){window.pkGlobalThumbCache.add('${item.id}');}this.style.opacity='1';this.previousElementSibling.style.opacity='0';"
                 onerror="this.previousElementSibling.style.opacity='1';this.remove();">
     </div>
@@ -18505,7 +18554,7 @@ return `<div class="pk-min-media-box" style="width:24px;height:24px;margin-right
 }
 
 if (item.icon_link) {
-return `<div class="pk-min-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; margin-right:12px; flex-shrink:0; overflow:visible;"><img draggable="false" src="${item.icon_link}" style="width:24px; height:24px; object-fit:contain; border-radius:4px;" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';"><span style="display:none; align-items:center; justify-content:center;">${iconHtml}</span>${blHtml}</div>`;
+return `<div class="pk-min-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; margin-right:12px; flex-shrink:0; overflow:visible;"><img decoding="async" draggable="false" src="${item.icon_link}" style="width:24px; height:24px; object-fit:contain; border-radius:4px;" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';"><span style="display:none; align-items:center; justify-content:center;">${iconHtml}</span>${blHtml}</div>`;
 }
 return `<div class="pk-min-icon" style="position:relative; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; margin-right:12px; flex-shrink:0; overflow:visible;">${iconHtml}${blHtml}</div>`;
 
@@ -34144,7 +34193,7 @@ display: flex; align-items: center;
 height: ${RN_ROW_HEIGHT}px; padding-right: 20px;
 border-bottom: 1px dashed #f0f0f0;
 box-sizing: border-box; font-size: 13px;
-color: var(--pk-fg);
+color: var(--pk-fg); contain: layout paint;
 `;
 
 for (let i = start; i < end; i++) {
@@ -34172,7 +34221,7 @@ const usableCover = hasCover && !isPreviewIconFailed(it.thumbnail_link);
 const fallbackSvg = getIcon(it).replace(/width="\d+"/, 'width="24"').replace(/height="\d+"/, 'height="24"');
 const makePreviewImg = (src, fit, radius = '0') => {
 const safeSrc = String(src || '').replace(/"/g, '&quot;');
-return `<img data-pk-preview-src="${safeSrc}" src="${safeSrc}" style="width:24px;height:24px;object-fit:${fit};border-radius:${radius};flex-shrink:0;">`;
+return `<img data-pk-preview-src="${safeSrc}" src="${safeSrc}" decoding="async" style="width:24px;height:24px;object-fit:${fit};border-radius:${radius};flex-shrink:0;">`;
 };
 
 if (usableCover) {
