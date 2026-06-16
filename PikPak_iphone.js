@@ -45,6 +45,7 @@
 // @connect            whatslink.info
 // @connect            localhost
 // @connect            127.0.0.1
+// @connect            *
 // @run-at             document-start
 // @require            https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js
 // @require            https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js
@@ -1531,7 +1532,7 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
 
 /* iOS Safari mobile adaptation */
 @media (max-width: 768px) {
-  .pk-win {
+  .pk-win, .pk-maximized {
     min-width: 0 !important;
     min-height: 0 !important;
     width: 100% !important;
@@ -1539,31 +1540,102 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
     border-radius: 0 !important;
     border: none !important;
   }
-  .pk-sidebar {
+  .pk-sidebar, .pk-maximized .pk-sidebar {
     width: 54px !important;
     padding: 8px 0 !important;
+    align-items: center !important;
   }
-  .pk-nav-btn {
+  .pk-nav-btn, .pk-maximized .pk-nav-btn {
     width: 38px !important;
     height: 38px !important;
+    justify-content: center !important;
   }
-  #pk-btn-cloud {
+  .pk-sidebar .pk-nav-btn span, .pk-maximized .pk-nav-btn span {
+    display: none !important;
+  }
+  #pk-btn-cloud, .pk-maximized #pk-btn-cloud {
     margin-bottom: 8px !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important;
   }
-  .pk-grid-hd, .pk-row {
+  #pk-btn-cloud svg, .pk-maximized #pk-btn-cloud svg {
+    margin-right: 0 !important;
+    transform: scale(1.3) !important;
+  }
+  #pk-quota-wrap, .pk-maximized #pk-quota-wrap {
+    display: none !important;
+  }
+  /* Dynamic grid columns based on child count */
+  .pk-grid-hd:has(> div:first-child:nth-last-child(5)),
+  .pk-row:has(> div:first-child:nth-last-child(5)) {
+    grid-template-columns: 36px 1fr 60px !important;
+  }
+  .pk-grid-hd:has(> div:first-child:nth-last-child(6)),
+  .pk-row:has(> div:first-child:nth-last-child(6)) {
     grid-template-columns: 36px 30px 1fr 60px !important;
   }
-  .pk-grid-hd > div:nth-child(5), .pk-row > div:nth-child(5),
-  .pk-grid-hd > div:nth-child(6), .pk-row > div:nth-child(6) {
+  .pk-grid-hd:has(> div:first-child:nth-last-child(7)),
+  .pk-row:has(> div:first-child:nth-last-child(7)) {
+    grid-template-columns: 36px 30px 1fr 60px 60px !important;
+  }
+  /* Hide the last two columns (usually Date and Operations) on mobile */
+  .pk-grid-hd > div:nth-last-child(-n+2),
+  .pk-row > div:nth-last-child(-n+2) {
     display: none !important;
   }
-  .pk-ov .pk-btn span, .pk-ov button span {
+  .pk-ov .pk-btn span, .pk-ov button span, .pk-maximized .pk-btn span {
     display: none !important;
   }
-  .pk-ov .pk-btn, .pk-ov button {
+  .pk-ov .pk-btn, .pk-ov button, .pk-maximized .pk-btn {
     padding: 0 8px !important;
     min-width: 36px !important;
+    height: 32px !important;
+    font-size: 13px !important;
     justify-content: center !important;
+  }
+  .pk-nav, .pk-maximized #pk-crumb {
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .pk-nav::-webkit-scrollbar, .pk-maximized #pk-crumb::-webkit-scrollbar {
+    display: none !important;
+  }
+  .pk-hd, .pk-maximized .pk-hd {
+    padding: 0 10px !important;
+    height: 44px !important;
+  }
+  .pk-tt, .pk-maximized .pk-tt {
+    font-size: 14px !important;
+    gap: 6px !important;
+  }
+  .pk-tt span:nth-child(2), .pk-maximized .pk-tt span:nth-child(2) {
+    display: none !important;
+  }
+  .pk-tt svg, .pk-maximized .pk-tt svg {
+    margin-right: 4px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .pk-tb, .pk-maximized .pk-tb {
+    height: 44px !important;
+    padding: 0 8px !important;
+  }
+  .pk-ft, .pk-maximized .pk-ft {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 10px 16px !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+  }
+  .pk-stat, .pk-maximized .pk-ft .pk-stat {
+    text-align: center !important;
+    font-size: 12px !important;
+  }
+  .pk-grp, .pk-maximized .pk-ft .pk-grp {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
   }
   .pk-modal {
     width: 90% !important;
