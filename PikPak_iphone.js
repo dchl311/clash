@@ -2,7 +2,7 @@
 // @name               PikPak 增强大师 (iPhone版)
 // @name:zh-CN         PikPak 增强大师 (iPhone版)
 // @namespace          https://github.com/dchl311/
-// @version            3.1.2
+// @version            3.1.3
 // @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
@@ -50,6 +50,43 @@
 "use strict";
 
 if (window.self !== window.top) return;
+
+const originalGM_setClipboard = typeof GM_setClipboard === 'function' ? GM_setClipboard : null;
+const GM_setClipboard = (text) => {
+    try {
+        if (originalGM_setClipboard) {
+            originalGM_setClipboard(text);
+            return;
+        }
+    } catch (e) {
+        console.warn('originalGM_setClipboard failed:', e);
+    }
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(text).catch(err => {
+            console.warn('navigator.clipboard failed, falling back:', err);
+            pkCopyFallback(text);
+        });
+        return;
+    }
+    pkCopyFallback(text);
+};
+
+const pkCopyFallback = (text) => {
+    try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        ta.style.left = '-999999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    } catch (err) {
+        console.error('Fallback copy failed completely:', err);
+    }
+};
 
 const parseCloudLinks = (rawString, isSmartFix) => {
 const formattedVal = String(rawString || '').replace(/(https?:\/\/|ftp:\/\/|sftp:\/\/|magnet:\?|ed2k:\/\/|thunder:\/\/)/gi, '\n$1');
@@ -1556,22 +1593,57 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
   #pk-quota-wrap, .pk-maximized #pk-quota-wrap {
     display: none !important;
   }
-  /* Dynamic grid columns based on child count */
-  .pk-grid-hd:has(> div:first-child:nth-last-child(5)),
-  .pk-row:has(> div:first-child:nth-last-child(5)) {
-    grid-template-columns: 36px 1fr 60px !important;
+  /* Responsive flex layout for list views on mobile to prevent overflow */
+  .pk-grid-hd:not(.pk-grid-view-hd), .pk-row:not(.pk-grid-card-row) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
   }
-  .pk-grid-hd:has(> div:first-child:nth-last-child(6)),
-  .pk-row:has(> div:first-child:nth-last-child(6)) {
-    grid-template-columns: 36px 30px 1fr 60px !important;
+  .pk-grid-hd:not(.pk-grid-view-hd) > div, .pk-row:not(.pk-grid-card-row) > div {
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
   }
-  .pk-grid-hd:has(> div:first-child:nth-last-child(7)),
-  .pk-row:has(> div:first-child:nth-last-child(7)) {
-    grid-template-columns: 36px 30px 1fr 60px 60px !important;
+  /* Checkbox column */
+  .pk-grid-hd:not(.pk-grid-view-hd) > div:first-child,
+  .pk-row:not(.pk-grid-card-row) > div:first-child {
+    width: 36px !important;
+    flex: 0 0 36px !important;
+    justify-content: center !important;
   }
-  /* Hide the last two columns (usually Date and Operations) on mobile */
-  .pk-grid-hd > div:nth-last-child(-n+2),
-  .pk-row > div:nth-last-child(-n+2) {
+  /* Icon or Starred column */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="starred"],
+  .pk-row:not(.pk-grid-card-row) > .pk-min-media-box,
+  .pk-row:not(.pk-grid-card-row) > .pk-min-icon,
+  .pk-row:not(.pk-grid-card-row) > .pk-max-icon-box {
+    width: 30px !important;
+    flex: 0 0 30px !important;
+    justify-content: center !important;
+    margin-right: 0 !important;
+  }
+  /* Name column takes remaining space */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="name"],
+  .pk-row:not(.pk-grid-card-row) > .pk-name {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+  }
+  /* Size column (immediately following name) */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="name"] + div,
+  .pk-row:not(.pk-grid-card-row) > .pk-name + div {
+    width: 60px !important;
+    flex: 0 0 60px !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
+    margin-left: auto !important;
+  }
+  /* Hide all other columns after size/first meta column */
+  .pk-grid-hd:not(.pk-grid-view-hd) > .pk-col[data-k="name"] + div ~ div,
+  .pk-row:not(.pk-grid-card-row) > .pk-name + div ~ div,
+  .pk-col[data-k="modified_time"], .pk-col[data-k="duration"], .pk-col[data-k="path"],
+  .pk-col[data-k="play_time"], .pk-col[data-k="view_count"], .pk-col[data-k="save_count"],
+  .pk-col[data-k="share_status"] {
     display: none !important;
   }
   .pk-ov .pk-btn span, .pk-ov button span, .pk-maximized .pk-btn span {
@@ -1610,6 +1682,23 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
   .pk-tb, .pk-maximized .pk-tb {
     height: 44px !important;
     padding: 0 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .pk-tb::-webkit-scrollbar, .pk-maximized .pk-tb::-webkit-scrollbar {
+    display: none !important;
+  }
+  .pk-share-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .pk-s-sec {
+    padding: 0 16px !important;
   }
   .pk-ft, .pk-maximized .pk-ft {
     flex-direction: column !important;
@@ -1635,7 +1724,7 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
   .pk-vp, .pk-scroll, .pk-modal, .pk-prev-list, .pk-bl-area, .pk-settings-modal-body, #pk-rn-vp, .pk-sub-pane, #pk_sub_search_list, .pk-p-pop, .pk-share-modal {
     -webkit-overflow-scrolling: touch !important;
   }
-  .pk-btn, button, #pk-launch, .pk-nav-btn, .pk-grp-chk, input[type="checkbox"], input[type="radio"], select, .pk-tab-item, .pk-action-btn {
+  .pk-btn, button, #pk-launch, .pk-nav-btn, .pk-grp-chk, input[type="checkbox"], input[type="radio"], select, .pk-tab-item, .pk-action-btn, .pk-row, .pk-grid-view-hd, .pk-settings-modal-inner, .pk-modal {
     touch-action: manipulation !important;
   }
   .pk-vp, .pk-modal, .pk-settings-modal-inner {
@@ -1668,9 +1757,48 @@ const mmss = String(m).padStart(2, '0') + ':' + String(sc).padStart(2, '0');
 return h > 0 ? String(h).padStart(2, '0') + ':' + mmss : mmss;
 };
 
-function gmGet(key, def) { if (typeof GM_getValue !== 'undefined') { let v = GM_getValue(key, def); return (v === null) ? def : v; } return def; }
-function gmSet(key, val) { if (typeof GM_setValue !== 'undefined') return GM_setValue(key, val); }
-function gmHas(key) { try { if (typeof GM_listValues !== 'undefined') { const keys = GM_listValues(); if (Array.isArray(keys)) return keys.includes(key); } if (typeof GM_getValue !== 'undefined') { const marker = `__pk_missing_${key}_${Date.now()}_${Math.random()}__`; return GM_getValue(key, marker) !== marker; } } catch (e) {} return false; }
+function gmGet(key, def) {
+    try {
+        if (typeof GM_getValue !== 'undefined') {
+            let v = GM_getValue(key, def);
+            return (v === null) ? def : v;
+        }
+    } catch (e) {}
+    try {
+        const val = localStorage.getItem('pk_fallback_' + key);
+        if (val !== null) {
+            try { return JSON.parse(val); } catch(err) { return val; }
+        }
+    } catch (e) {}
+    return def;
+}
+function gmSet(key, val) {
+    try {
+        if (typeof GM_setValue !== 'undefined') {
+            GM_setValue(key, val);
+            return;
+        }
+    } catch (e) {}
+    try {
+        localStorage.setItem('pk_fallback_' + key, JSON.stringify(val));
+    } catch (e) {}
+}
+function gmHas(key) {
+    try {
+        if (typeof GM_listValues !== 'undefined') {
+            const keys = GM_listValues();
+            if (Array.isArray(keys)) return keys.includes(key);
+        }
+        if (typeof GM_getValue !== 'undefined') {
+            const marker = `__pk_missing_${key}_${Date.now()}_${Math.random()}__`;
+            return GM_getValue(key, marker) !== marker;
+        }
+    } catch (e) {}
+    try {
+        return localStorage.getItem('pk_fallback_' + key) !== null;
+    } catch (e) {}
+    return false;
+}
 async function gmSetAsync(key, val) { const r = gmSet(key, val); if (r && typeof r.then === 'function') await r; }
 let pkScriptUpdateCheckPromise=null;
 function getScriptVersion(){try{return String((typeof GM_info!=='undefined'&&GM_info.script&&GM_info.script.version)||'0').replace(/^v/i,'').trim();}catch(e){return '0';}}
