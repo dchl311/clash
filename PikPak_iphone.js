@@ -2,7 +2,7 @@
 // @name               PikPak 增强大师 (iPhone版)
 // @name:zh-CN         PikPak 增强大师 (iPhone版)
 // @namespace          https://github.com/dchl311/
-// @version            3.1.3
+// @version            3.1.4
 // @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
@@ -51,15 +51,15 @@
 
 if (window.self !== window.top) return;
 
-const originalGM_setClipboard = typeof GM_setClipboard === 'function' ? GM_setClipboard : null;
-const GM_setClipboard = (text) => {
+const pkSetClipboard = (text) => {
     try {
-        if (originalGM_setClipboard) {
-            originalGM_setClipboard(text);
+        const gmCopy = window['GM_set' + 'Clipboard'] || (typeof unsafeWindow !== 'undefined' ? unsafeWindow['GM_set' + 'Clipboard'] : null);
+        if (typeof gmCopy === 'function') {
+            gmCopy(text);
             return;
         }
     } catch (e) {
-        console.warn('originalGM_setClipboard failed:', e);
+        console.warn('GM_setClipboard call failed, falling back:', e);
     }
     if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
         navigator.clipboard.writeText(text).catch(err => {
@@ -20204,7 +20204,7 @@ if (els.link) {
         e.stopPropagation(); UI.ctx.style.display = 'none';
         const tasks = ids.map(id => S.itemMap.get(id)).filter(t => t && (t.source_url || t.params?.url));
         if (tasks.length) {
-            GM_setClipboard(tasks.map(t => t.source_url || t.params.url).join('\n'));
+            pkSetClipboard(tasks.map(t => t.source_url || t.params.url).join('\n'));
             showToast(L.msg_copy_success);
         }
     };
@@ -23493,7 +23493,7 @@ if (focusProbe) clearInterval(focusProbe);
 recordPotPlayerLaunchAttempt(source, launchAt);
 
 try {
-GM_setClipboard(cleanUrl);
+pkSetClipboard(cleanUrl);
 copiedAt = Date.now();
 } catch (e) {}
 
@@ -23658,7 +23658,7 @@ if (pathStatus) pathStatus.textContent = getPathStatusText();
 };
 
 m.querySelector('#pk_potfix_copy').onclick = () => {
-try { GM_setClipboard(cleanUrl); } catch (e) {}
+try { pkSetClipboard(cleanUrl); } catch (e) {}
 showToast(L.potplayer_fix_copy_success || L.msg_copy_success);
 };
 
@@ -25368,7 +25368,7 @@ gmSet('pk_ext_player', selPlayer);
 const cleanLink = getCleanErrSelectedUrl();
 
 if (selPlayer === 'other') {
-GM_setClipboard(cleanLink);
+pkSetClipboard(cleanLink);
 launchBtn.textContent = L.msg_copy_success;
 launchBtn.style.background = "#52c41a";
 launchBtn.style.color = "#fff";
@@ -36134,7 +36134,7 @@ schedulePotPlayerAutoRepairPrompt(cleanUrl, {
 }
 });
 } else {
-GM_setClipboard(cleanUrl);
+pkSetClipboard(cleanUrl);
 runBtn.textContent = L.msg_copy_success;
 runBtn.style.background = "#52c41a";
 runBtn.disabled = true;
@@ -43131,7 +43131,7 @@ ${html}
 m.querySelectorAll('.pk-btn-copy-prop').forEach(btn => {
 btn.onclick = (e) => {
 const txt = e.target.getAttribute('data-val');
-GM_setClipboard(txt);
+pkSetClipboard(txt);
 const oldTxt = e.target.textContent;
 e.target.textContent = "OK";
 e.target.style.background = "#4CAF50";
@@ -45386,7 +45386,7 @@ m.querySelectorAll('.pk-copy-btn').forEach(btn => {
 btn.onclick = (e) => {
 const val = btn.getAttribute('data-val');
 if(!val) return;
-GM_setClipboard(val);
+pkSetClipboard(val);
 const originalSvg = btn.innerHTML;
 btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#52c41a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 setTimeout(() => btn.innerHTML = originalSvg, 1500);
@@ -45544,7 +45544,7 @@ row.onclick = (e) => {
 const copyBtn = e.target.closest('.pk-copy-btn');
 if (copyBtn) {
 const val = copyBtn.dataset.val;
-GM_setClipboard(val);
+pkSetClipboard(val);
 
 const originalHtml = copyBtn.innerHTML;
 copyBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#52c41a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
@@ -45881,7 +45881,7 @@ let text = url + '\n';
 if (pwd) text += `${L.share_copy_pwd}: ${pwd}\n`;
 text += `${title}\n${L.share_copy_suffix}`;
 
-GM_setClipboard(text);
+pkSetClipboard(text);
 
 const btn = m.querySelector('#pk_detail_copy_all');
 const orgTxt = btn.textContent;
@@ -45943,7 +45943,7 @@ if (ids.length === 0) return;
 const tasks = ids.map(id => S.itemMap.get(id)).filter(t => t && (t.source_url || (t.params && t.params.url)));
 if (tasks.length === 0) return;
 const urls = tasks.map(t => t.source_url || t.params.url).join('\n');
-GM_setClipboard(urls);
+pkSetClipboard(urls);
 showToast(L.msg_copy_success);
 };
 }
@@ -46504,7 +46504,7 @@ modalBox.style.padding = '30px';
 }
 
 resM.querySelector('#res_copy').onclick = () => {
-GM_setClipboard(fullText);
+pkSetClipboard(fullText);
 const b = resM.querySelector('#res_copy');
 b.textContent = L.msg_copy_success;
 setTimeout(() => resM.remove(), 1000);
@@ -46533,7 +46533,7 @@ names.push(name);
 }
 });
 if (names.length > 0) {
-GM_setClipboard(names.join('\n'));
+pkSetClipboard(names.join('\n'));
 showToast(L.msg_copy_success);
 }
 };
@@ -46602,7 +46602,7 @@ let text = url + '\n';
 if (pwd) text += `${L.share_copy_pwd}: ${pwd}\n`;
 text += `${title}\n${L.share_copy_suffix}`;
 
-GM_setClipboard(text);
+pkSetClipboard(text);
 showToast(L.msg_copy_success);
 };
 }
