@@ -1502,13 +1502,22 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
     gap: 12px !important;
   }
   .pk-settings-modal-inner {
+    width: 100% !important;
+    max-width: 100% !important;
     max-height: calc(100vh - 120px) !important;
+    box-sizing: border-box !important;
   }
   .pk-settings-modal-header {
     padding: 15px 15px 10px 15px !important;
+    box-sizing: border-box !important;
   }
   .pk-settings-modal-body {
     padding: 10px 15px 15px 15px !important;
+    box-sizing: border-box !important;
+  }
+  .pk-settings-modal-footer {
+    padding: 12px 15px 15px 15px !important;
+    box-sizing: border-box !important;
   }
 
   .pk-win, .pk-maximized {
@@ -41167,7 +41176,7 @@ const m = showModal(`
 </div>
 </div>
 
-<div style="padding: 20px 30px 30px 30px; flex-shrink:0; background:var(--pk-bg); border-top:1px solid var(--pk-bd);">
+<div class="pk-settings-modal-footer" style="padding: 20px 30px 30px 30px; flex-shrink:0; background:var(--pk-bg); border-top:1px solid var(--pk-bd);">
 <div class="pk-modal-act" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 0;">
 <button class="pk-btn" id="set_cancel" style="height:44px; border-radius:10px; justify-content:center; background:transparent; font-weight:600; font-size:15px;">${L.btn_cancel}</button>
 <button class="pk-btn pri" id="set_save" style="height:44px; border-radius:10px; background:var(--pk-pri); color:#fff; font-weight:bold; justify-content:center; border:none; font-size:15px;">${L.btn_save}</button>
