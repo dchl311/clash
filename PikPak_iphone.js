@@ -1,30 +1,18 @@
 // ==UserScript==
-// @name               PikPak 增强大师
-// @name:zh-CN         PikPak 增强大师
-// @name:zh-TW         PikPak 增強大師
-// @name:en            PikPak Enhancement Master
-// @name:ko            PikPak Enhancement Master
-// @name:ja            PikPak Enhancement Master
-// @name:id            PikPak Enhancement Master
-// @name:ms            PikPak Enhancement Master
-// @namespace          https://github.com/digbug82/
-// @version            3.1.0
-// @author             digbug82
+// @name               PikPak 增强大师 (iPhone版)
+// @name:zh-CN         PikPak 增强大师 (iPhone版)
+// @namespace          https://github.com/dchl311/
+// @version            3.1.1
+// @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
 // @description:zh-CN  PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
-// @description:zh-TW  PikPak 網盤增強：整合 Aria2/Gopeed/ABDM/IDM 下載、下載直鏈加速、下載過濾、分享連結解析增強、檔案/資料夾查重、批次重命名、資源清理、批次解壓、PotPlayer 直達、M3U 匯出、排序與搜尋增強、TXT 磁鏈提取、資料遷移、目錄樹匯出、以圖搜圖、視音訊播放增強等。
-// @description:en     PikPak cloud drive enhancement: integrates Aria2/Gopeed/ABDM/IDM downloads, direct-link acceleration, download filtering, enhanced share-link parsing, file/folder deduplication, batch renaming, resource cleanup, batch extraction, PotPlayer direct open, M3U export, sorting and search enhancements, TXT magnet extraction, data migration, directory tree export, reverse image search, and enhanced audio/video playback.
-// @description:ko     PikPak 클라우드 드라이브 강화: Aria2/Gopeed/ABDM/IDM 다운로드, 다운로드 직접 링크 가속, 다운로드 필터링, 공유 링크 파싱 강화, 파일/폴더 중복 검사, 일괄 이름 변경, 리소스 정리, 일괄 압축 해제, PotPlayer 바로 열기, M3U 내보내기, 정렬 및 검색 강화, TXT 마그넷 추출, 데이터 마이그레이션, 디렉터리 트리 내보내기, 이미지 검색, 오디오/비디오 재생 강화를 통합합니다.
-// @description:ja     PikPak クラウドドライブ強化：Aria2/Gopeed/ABDM/IDM ダウンロード、ダウンロード直リンク高速化、ダウンロードフィルター、共有リンク解析強化、ファイル/フォルダ重複チェック、一括リネーム、リソース整理、一括解凍、PotPlayer 直接起動、M3U エクスポート、並び替えと検索の強化、TXT マグネット抽出、データ移行、ディレクトリツリー出力、画像検索、音声/動画再生強化などを統合します。
-// @description:id     Peningkatan cloud drive PikPak: mengintegrasikan unduhan Aria2/Gopeed/ABDM/IDM, akselerasi tautan langsung unduhan, filter unduhan, parsing tautan berbagi yang ditingkatkan, deduplikasi file/folder, ganti nama massal, pembersihan sumber daya, ekstraksi massal, buka langsung dengan PotPlayer, ekspor M3U, peningkatan penyortiran dan pencarian, ekstraksi magnet dari TXT, migrasi data, ekspor pohon direktori, pencarian gambar, serta peningkatan pemutaran audio/video.
-// @description:ms     Penambahbaikan pemacu awan PikPak: mengintegrasikan muat turun Aria2/Gopeed/ABDM/IDM, pecutan pautan terus muat turun, penapisan muat turun, penghuraian pautan perkongsian dipertingkat, deduplikasi fail/folder, penamaan semula pukal, pembersihan sumber, nyahmampat pukal, buka terus dengan PotPlayer, eksport M3U, peningkatan susunan dan carian, pengekstrakan magnet TXT, migrasi data, eksport pepohon direktori, carian imej serta peningkatan main balik audio/video.
 // @match              https://mypikpak.com/drive/*
 // @match              https://app.mypikpak.com/*
 // @match              https://drive.mypikpak.com/*
-// @icon               https://raw.githubusercontent.com/digbug82/PikPak_Enhancement_Master/main/img/logo.svg
-// @homepage           https://github.com/digbug82/PikPak_Enhancement_Master
-// @supportURL         https://github.com/digbug82/PikPak_Enhancement_Master/issues
+// @icon               https://raw.githubusercontent.com/dchl311/clash/refs/heads/main/PikPak_iphone.js
+// @homepage           https://github.com/dchl311/clash
+// @supportURL         https://github.com/dchl311/clash/issues
 // @compatible         chrome
 // @compatible         edge
 // @grant              GM_setClipboard
@@ -49,46 +37,14 @@
 // @run-at             document-start
 // @require            https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js
 // @require            https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js
-// @downloadURL        https://raw.githubusercontent.com/digbug82/PikPak_Enhancement_Master/main/PikPak_Enhancement_Master.user.js
-// @updateURL          https://raw.githubusercontent.com/digbug82/PikPak_Enhancement_Master/main/PikPak_Enhancement_Master.meta.js
+// @downloadURL        https://raw.githubusercontent.com/dchl311/clash/refs/heads/main/PikPak_iphone.js
+// @updateURL          https://raw.githubusercontent.com/dchl311/clash/refs/heads/main/PikPak_iphone.js
 // ==/UserScript==
 
 /*
-* ============================================================================
-* COPYRIGHT & LICENSE NOTICE
-* ============================================================================
-* PikPak Enhancement Master
-*
-* Copyright (C) 2025-2026 digbug82.
-*
-* This program is free software: you can redistribute it and/or modify it
-* under the terms of the GNU Affero General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful, but WITHOUT
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
-* for more details.
-*
-* You should have received a copy of the GNU Affero General Public License
-* along with this program. If not, see <https://www.gnu.org/licenses/>.
-*
-* Source code: https://github.com/digbug82/PikPak_Enhancement_Master
-*
-* Acknowledgements:
-* This project is inspired in part by the UI design language, file-management
-* structure, and some web-side API interaction ideas of PikPak File Manager
-* v1.2.0 by 브랜뉴:
-* https://github.com/poihoii/PikPak_FileManager
-*
-* PikPak File Manager is licensed under the MIT License. Its original
-* copyright and license notice are preserved in THIRD_PARTY_NOTICES.md:
-* https://github.com/digbug82/PikPak_Enhancement_Master/blob/main/THIRD_PARTY_NOTICES.md
-*
-* Special thanks and respect to the original project and its author.
-* ============================================================================
-*/
+ * PikPak iPhone Edition
+ * Customized by dchl311
+ */
 
 (() => {
 "use strict";
@@ -410,11 +366,11 @@ potplayerPromptCooldown: 10 * 60 * 1000,
 potplayerLikelyOpenTrustTTL: 24 * 60 * 60 * 1000,
 potplayerSuppressTodayTTL: 24 * 60 * 60 * 1000,
 potplayerPostRepairConfirmDelay: 6000,
-scriptUpdateManifestUrl: 'https://raw.githubusercontent.com/digbug82/PikPak_Enhancement_Master/main/version.json',
+scriptUpdateManifestUrl: '',
 scriptUpdateCheckTTL: 24 * 60 * 60 * 1000,
 scriptUpdateCacheKey: 'pk_script_update_cache',
 scriptUpdateDismissPrefix: 'pk_script_update_dismiss_',
-scriptUpdateProjectUrl: 'https://github.com/digbug82/PikPak_Enhancement_Master',
+scriptUpdateProjectUrl: 'https://github.com/dchl311/clash',
 logoSVG: `<svg viewBox="0 0 238 200" style="width:24px;height:24px;border-radius:4px;flex-shrink:0;"><path d="M0 0 C1.82724609 0.01353516 1.82724609 0.01353516 3.69140625 0.02734375 C4.59761719 0.03894531 5.50382812 0.05054688 6.4375 0.0625 C5.95097979 7.11704304 4.33696858 12.90149479 1.6875 19.4375 C1.35234375 20.32566406 1.0171875 21.21382812 0.671875 22.12890625 C0.3315625 22.98097656 -0.00875 23.83304688 -0.359375 24.7109375 C-0.66198242 25.47583496 -0.96458984 26.24073242 -1.27636719 27.02880859 C-3.01571023 29.77913653 -4.60880008 30.70366989 -7.5625 32.0625 C-10.93383789 32.72265625 -10.93383789 32.72265625 -14.78515625 33.125 C-15.47874237 33.20142731 -16.17232849 33.27785461 -16.88693237 33.3565979 C-18.36660067 33.51855298 -19.84685768 33.67520381 -21.3276062 33.82696533 C-25.19232303 34.22318595 -29.05286739 34.65697538 -32.9140625 35.0859375 C-33.67180466 35.16903168 -34.42954681 35.25212585 -35.21025085 35.33773804 C-40.99791882 35.97875931 -46.74864414 36.77615252 -52.5 37.6875 C-61.81496788 39.10080547 -71.19269316 40.07620454 -80.5625 41.0625 C-19.8425 41.0625 40.8775 41.0625 103.4375 41.0625 C91.8875 39.7425 80.3375 38.4225 68.4375 37.0625 C63.8175 36.4025 59.1975 35.7425 54.4375 35.0625 C49.17221542 34.42736314 43.90722683 33.79696512 38.63671875 33.20703125 C37.62996094 33.08714844 36.62320313 32.96726563 35.5859375 32.84375 C34.69052246 32.74126953 33.79510742 32.63878906 32.87255859 32.53320312 C30.35601376 32.0467485 28.59527547 31.44037784 26.4375 30.0625 C23.38532266 24.97553776 21.3341425 19.45473677 19.1875 13.9375 C18.91695801 13.25671387 18.64641602 12.57592773 18.36767578 11.87451172 C16.82394482 7.78804812 16.13851057 4.42502757 16.4375 0.0625 C33.20320897 -0.76054389 50.04132 2.04640823 66.578125 4.53515625 C70.96365446 5.13439358 75.35589707 5.627565 79.75488281 6.11669922 C97.85972043 8.13836316 97.85972043 8.13836316 106.6875 9.4375 C107.39487305 9.52700928 108.10224609 9.61651855 108.83105469 9.70874023 C113.96714941 10.51808328 116.87598017 12.31623275 120.4375 16.0625 C121.69830294 18.53927732 122.67025259 20.7202309 123.5625 23.3125 C124.02136126 24.56846882 124.48232815 25.8236702 124.9453125 27.078125 C125.27250149 28.00288179 125.27250149 28.00288179 125.60630035 28.94632053 C126.38750394 31.05750635 126.38750394 31.05750635 127.44002533 32.93062496 C131.07482517 39.83448151 131.00351579 46.31795394 130.95507812 53.99243164 C130.96050802 55.37978344 130.96763552 56.76712947 130.97631836 58.15446472 C130.99445028 61.89829685 130.98752708 65.6416848 130.97480202 69.38552403 C130.96462344 73.31622656 130.97408092 77.24689291 130.98034668 81.17759705 C130.98760817 87.77544941 130.97807403 94.37312221 130.95898438 100.97094727 C130.93720936 108.58452515 130.94427739 116.19767461 130.96629 123.81124216 C130.98447611 130.36524706 130.98698696 136.91912344 130.97653532 143.47314543 C130.97031913 147.38014362 130.96941296 151.2869408 130.98268127 155.19392586 C130.99428653 158.8672447 130.9861299 162.54001414 130.96310425 166.213274 C130.95534421 168.19404482 130.96713242 170.17486244 130.97961426 172.15560913 C130.90049754 180.52230774 129.95755225 186.09535704 124.25390625 192.5234375 C123.51011719 193.15507812 122.76632813 193.78671875 122 194.4375 C121.25878906 195.08460938 120.51757812 195.73171875 119.75390625 196.3984375 C114.7661098 199.98157627 110.22842399 200.35421576 104.22135925 200.32992554 C103.39785408 200.33445665 102.5743489 200.33898776 101.72588903 200.34365618 C98.968488 200.35630894 96.21128426 200.35467924 93.45385742 200.35302734 C91.475975 200.35901206 89.49809491 200.36581748 87.5202179 200.37338257 C82.14823484 200.39105594 76.77631549 200.39573853 71.40430617 200.39701414 C66.91878502 200.39891354 62.4332787 200.40627158 57.94776326 200.41335833 C47.36384951 200.42964512 36.77996977 200.43452703 26.19604492 200.43310547 C15.28118177 200.43190408 4.36651636 200.45300486 -6.54829675 200.4845928 C-15.92170288 200.51075235 -25.29504442 200.52147289 -34.66848677 200.52019465 C-40.26569836 200.51968491 -45.86273424 200.52537507 -51.45990944 200.54655075 C-56.725388 200.56592749 -61.99052314 200.5660613 -67.25601387 200.55151749 C-69.1861191 200.54942757 -71.11624579 200.55414114 -73.04631424 200.5662384 C-75.68641426 200.58171127 -78.32533312 200.57236959 -80.96540833 200.55697632 C-81.72466655 200.56726344 -82.48392478 200.57755057 -83.26619083 200.58814943 C-90.327556 200.49750269 -96.39704041 197.82485418 -101.375 192.75 C-102.18904297 191.95142578 -102.18904297 191.95142578 -103.01953125 191.13671875 C-108.29053612 184.05088689 -108.01804154 177.09915158 -108.0300293 168.55004883 C-108.04229625 167.18245883 -108.05575106 165.81487905 -108.07029724 164.4473114 C-108.10523797 160.74401042 -108.12059214 157.04088761 -108.13013434 153.33744264 C-108.13673436 151.01403475 -108.14708893 148.69067299 -108.15863991 146.36728477 C-108.19836069 138.23287671 -108.22038571 130.09860956 -108.22827148 121.96411133 C-108.23610728 114.43116961 -108.28516577 106.89925647 -108.35333699 99.36664182 C-108.41007964 92.86514961 -108.43519788 86.36399446 -108.43721896 79.86225718 C-108.43904166 75.9947118 -108.45309089 72.1282487 -108.50003624 68.26096535 C-108.72797687 48.29049317 -107.52961567 30.83210742 -95.5625 14.0625 C-92.23797604 10.732487 -88.44904231 10.20048941 -83.953125 9.5 C-83.20613342 9.37633057 -82.45914185 9.25266113 -81.68951416 9.12524414 C-74.04584045 7.901492 -66.3645662 7.06662299 -58.66394043 6.29776001 C-54.62860447 5.8940274 -50.59547976 5.46951727 -46.5625 5.04296875 C-45.77776306 4.96008102 -44.99302612 4.8771933 -44.18450928 4.79179382 C-36.33754684 3.9513441 -28.53467892 2.87051571 -20.734375 1.67578125 C-13.79617508 0.63078847 -7.03103815 -0.06826251 0 0 Z M-47 131 L-15 106 L-47 81 L-47 91 L-27 106 L-47 121 Z M45.4375 89.0625 C43.16309531 93.61130937 44.11732026 99.81887268 44.0625 104.8125 C44.02511719 106.08867188 43.98773438 107.36484375 43.94921875 108.6796875 C43.6563417 116.25277258 43.6563417 116.25277258 46.7109375 122.91015625 C50.0632924 125.55649945 51.41007501 125.90713502 55.50390625 125.58984375 C58.83921214 124.68021487 60.4149221 122.75927054 62.4375 120.0625 C64.03299443 115.26404894 63.62174204 110.1852134 63.625 105.1875 C63.64336914 103.71603516 63.64336914 103.71603516 63.66210938 102.21484375 C63.77173933 93.57358621 63.77173933 93.57358621 59.75 86.1875 C54.01325068 83.39664894 49.78182352 84.71817648 45.4375 89.0625 Z M-18.5625 155.0625 C-20.89546251 157.88967213 -20.89546251 157.88967213 -20.3125 161.125 C-19.8031756 164.161959 -19.8031756 164.161959 -17.5625 166.0625 C-15.5023267 166.81656896 -13.41368556 167.49416461 -11.3125 168.125 C-10.19359375 168.46660156 -9.0746875 168.80820313 -7.921875 169.16015625 C-1.62436639 170.85169635 4.26860909 171.24487637 10.75 171.25 C11.9555957 171.26836914 11.9555957 171.26836914 13.18554688 171.28710938 C21.14907742 171.30632948 28.31945463 169.57146397 35.875 167.125 C36.88433594 166.80660156 37.89367187 166.48820313 38.93359375 166.16015625 C41.73511224 165.200361 41.73511224 165.200361 43.4375 162.0625 C43.1133631 158.74009676 42.82973697 157.45473697 40.4375 155.0625 C35.63637087 154.61062902 31.50016124 155.74460874 26.9375 157.0625 C14.69655136 160.31686985 0.09246916 160.8899845 -11.5625 155.0625 C-15.0625 154.72916667 -15.0625 154.72916667 -18.5625 155.0625 Z " fill="currentColor" transform="translate(107.5625,-0.0625)"/></svg>`,
 emptySVG: `<svg viewBox="-2 -2 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 10L7 5H17L19 10H5Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2" stroke-linejoin="round"/><path d="M4 10V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V10" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10L1 6.5" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 10L23 6.5" stroke="#334155" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><g stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13L10 14L9 15"/><path d="M15 13L14 14L15 15"/><path d="M11 17.5H13"/></g>`,
 dupHashSVG: `<svg style="width:24px;height:24px;margin-right:8px;flex-shrink:0;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M798 322.42A308.78 308.78 0 0 0 676.73 211.1a17.5 17.5 0 1 0-15.94 31.16 272.73 272.73 0 0 1 148.71 243v63.83c0 25.58-3.14 134.1-8.62 159.68a17.5 17.5 0 0 0 13.44 20.78 17.94 17.94 0 0 0 3.69 0.39 17.5 17.5 0 0 0 17.09-13.83c6.81-31.76 9.4-148.75 9.4-167v-63.88A307 307 0 0 0 798 322.42zM365.68 272.82a273.38 273.38 0 0 1 231.18-53.68 17.5 17.5 0 1 0 7.68-34.14 307.93 307.93 0 0 0-367.72 231.18 17.5 17.5 0 1 0 34.11 7.82 273.89 273.89 0 0 1 94.75-151.18zM246.54 467.73a17.49 17.49 0 0 0-17.5 17.5v69c0 50.29-14.45 87.61-44.18 114.11a17.5 17.5 0 0 0 23.28 26.13c22.56-20.11 38.52-45.63 47.43-75.85 5.7-19.34 8.47-40.4 8.47-64.39v-69a17.5 17.5 0 0 0-17.5-17.5zM743.42 636.35v-0.17l-0.5-52.83a17.5 17.5 0 1 0-35 0.34l0.5 52.74c0 4.2 0 8.79 0.05 13.68 0.21 34.94 0.53 87.74-9.16 116.81a17.5 17.5 0 1 0 33.2 11.08c11.52-34.56 11.2-88.62 11-128.09-0.07-4.85-0.09-9.4-0.09-13.56z" fill="currentColor"></path><path d="M707.92 527.26a17.5 17.5 0 0 0 35 0v-45c0-114.17-92.89-207-207.06-207a207.35 207.35 0 0 0-58.49 8.38 17.5 17.5 0 0 0 9.87 33.58 172.24 172.24 0 0 1 48.62-7c94.87 0 172.06 77.18 172.06 172.05zM363.81 482.22A172.4 172.4 0 0 1 437 341.4a17.5 17.5 0 1 0-20.14-28.62 207.45 207.45 0 0 0-88 169.44v108.39a203 203 0 0 1-6.86 55.17 162.05 162.05 0 0 1-47.22 77.75 17.5 17.5 0 1 0 23.65 25.8c27.84-25.53 47.13-57.24 57.32-94.26a236.32 236.32 0 0 0 8.09-64.46zM440.83 566a17.5 17.5 0 0 0-17.5 17.47l-0.11 56.86c0 12.5-2.7 77.59-56 131.85a17.5 17.5 0 1 0 25 24.53 229.06 229.06 0 0 0 56.17-94.59c8.93-29.25 9.89-53 9.89-61.75l0.11-56.84A17.5 17.5 0 0 0 440.83 566z" fill="currentColor"></path><path d="M604.17 419.76a17.5 17.5 0 0 0-4.71-24.3 113 113 0 0 0-176.16 93.68v38.12a17.5 17.5 0 0 0 35 0v-38.12a78 78 0 0 1 121.57-64.68 17.49 17.49 0 0 0 24.3-4.7zM618.85 438.05a17.51 17.51 0 0 0-9.92 22.68 77.55 77.55 0 0 1 5.33 28.41v206.29c0 33.49-6.45 66.07-19.71 99.61a17.5 17.5 0 1 0 32.55 12.87c14.9-37.71 22.16-74.51 22.16-112.48V489.14a112.38 112.38 0 0 0-7.74-41.14 17.5 17.5 0 0 0-22.67-9.95z" fill="currentColor"></path><path d="M549.91 488a17.5 17.5 0 0 0-35 0v174.37c0 0.51 0 1 0.06 1.52 0.08 0.88 7 89.15-51.16 152.8a17.5 17.5 0 0 0 25.83 23.62c66-72.15 61-168 60.27-178.62z" fill="currentColor"></path></svg>`,
@@ -827,7 +783,9 @@ html.pk-txt-preview-fullscreen-lock, body.pk-txt-preview-fullscreen-lock { overf
 .pk-gv-cover.pk-gv-has-thumb { background: transparent; }
 .pk-gv-cover img { max-width: 100%; max-height: 100%; object-fit: cover; display: block; border-radius: 12px; }
 .pk-gv-cover.pk-gv-has-thumb > img { width: 100%; height: 100%; }
-.pk-gv-cover.pk-gv-blur > img, .pk-gv-cover.pk-gv-blur .pk-gv-media-mount [data-pk-thumb-ready="1"] > .pk-max-thumb, .pk-gv-cover.pk-gv-blur .pk-gv-media-mount .pk-max-thumb[data-pk-frozen-cover="1"], .pk-gv-cover.pk-gv-blur .pk-gv-folder-preview img[data-pk-id][data-pk-src], .pk-gv-cover.pk-gv-blur .pk-gv-folder-preview img[data-pk-frozen-cover="1"] { filter: blur(8px); transform: scale(1.04); }
+.pk-gv-cover.pk-gv-blur > img, .pk-gv-cover.pk-gv-blur .pk-gv-media-mount [data-pk-thumb-ready="1"] > .pk-max-thumb, .pk-gv-cover.pk-gv-blur .pk-gv-media-mount .pk-max-thumb[data-pk-frozen-cover="1"], .pk-gv-cover.pk-gv-blur .pk-gv-folder-preview img[data-pk-id][data-pk-src], .pk-gv-cover.pk-gv-blur .pk-gv-folder-preview img[data-pk-frozen-cover="1"], .pk-gv-cover.pk-gv-blur img.pk-gv-folder-fallback { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+.pk-gv-cover.pk-gv-blur .pk-gv-icon, .pk-gv-cover.pk-gv-blur .pk-gv-folder-base { opacity: 1 !important; display: flex !important; }
+.pk-gv-cover.pk-gv-blur .pk-gv-play { display: none !important; }
 .pk-gv-cover.pk-gv-file .pk-gv-media-mount { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .pk-gv-cover.pk-gv-file .pk-gv-media-mount > div { width: 100%; height: 100%; }
 .pk-gv-cover .pk-gv-icon { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -1532,6 +1490,27 @@ body.pk-hide-all-ui #pk-launch, body.pk-hide-all-ui .pk-ov, body.pk-hide-all-ui 
 
 /* iOS Safari mobile adaptation */
 @media (max-width: 768px) {
+  /* Modal and Settings view adaptation */
+  .pk-modal-ov {
+    padding: 10px !important;
+  }
+  .pk-modal {
+    width: 100% !important;
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    padding: 16px !important;
+    gap: 12px !important;
+  }
+  .pk-settings-modal-inner {
+    max-height: calc(100vh - 120px) !important;
+  }
+  .pk-settings-modal-header {
+    padding: 15px 15px 10px 15px !important;
+  }
+  .pk-settings-modal-body {
+    padding: 10px 15px 15px 15px !important;
+  }
+
   .pk-win, .pk-maximized {
     min-width: 0 !important;
     min-height: 0 !important;
@@ -2141,8 +2120,8 @@ const gcid = await queryGcidByCid(cid);
 return gcid || await calcXunleiGcid();
 };
 
-function getLang(){const u=gmGet('pk_lang','');if(u)return u;const n=navigator.language.toLowerCase();return (n==='zh'||n.startsWith('zh-cn')||n.startsWith('zh-sg'))?'zh':(n.startsWith('zh-tw')||n.startsWith('zh-hk')||n.startsWith('zh-mo'))?'tc':(n.startsWith('id')||n.startsWith('in'))?'id':n.startsWith('ms')?'ms':n.startsWith('ko')?'ko':n.startsWith('ja')?'ja':'en';}
-const I18N_CONF={defaultLang:'zh',remoteLangs:['tc','en','ko','ja','id','ms'],manifestUrl:'https://cdn.jsdelivr.net/gh/digbug82/PikPak_Enhancement_Master@main/i18n/manifest.json',baseUrl:'https://cdn.jsdelivr.net/gh/digbug82/PikPak_Enhancement_Master@main/i18n/',cachePrefix:'pk_i18n_',manifestKey:'pk_i18n_manifest',cacheTTL:7*24*60*60*1000,manifestTTL:24*60*60*1000,requiredKeys:['title','modal_settings_title','label_lang','msg_settings_saved','btn_nav_home']};
+function getLang(){return 'zh';}
+const I18N_CONF={defaultLang:'zh',remoteLangs:[],manifestUrl:'',baseUrl:'',cachePrefix:'pk_i18n_',manifestKey:'pk_i18n_manifest',cacheTTL:7*24*60*60*1000,manifestTTL:24*60*60*1000,requiredKeys:['title','modal_settings_title','label_lang','msg_settings_saved','btn_nav_home']};
 let pkRemoteI18n=null;
 let pkI18nReadyPromise=null;
 let pkI18nReadyLang='';
@@ -2843,7 +2822,7 @@ label_download_accel_query_param: "URL 参数名",
 msg_download_accel_invalid_domain: "加速地址无效",
 str_aria2_zero_byte_skipped: "0KB 文件已跳过",
 label_privacy_mode: "隐私图",
-label_blur_cover: "模糊媒体封面缩略图",
+label_blur_cover: "隐藏媒体封面缩略图 (不显示)",
 label_hide_button_text: "隐藏按钮文字",
 desc_hide_button_text: "只保留图标与悬浮提示",
 opt_privacy_off: "关闭",
@@ -4002,7 +3981,6 @@ return true;
 return true;
 }
 
-// Original Logic by digbug82. Modification does not grant ownership.
 async function coreRecursiveEngine(roots, options) {
 const { signal, onFile, onFolder, onProgress, preferFresh = false } = options;
 const L = getStrings();
@@ -4131,7 +4109,7 @@ await sleep(100);
 
 const version = (typeof GM_info !== 'undefined' && GM_info.script) ? GM_info.script.version : "1.0.0";
 
-console.log("%c PikPak Enhancement Master %c v" + version + " %c digbug82 %c AGPL-3.0-or-later ",
+console.log("%c PikPak iPhone %c v" + version + " %c dchl311 %c AGPL-3.0-or-later ",
 "color:#fff; background:#1a5eff; padding:3px 0; border-radius:4px 0 0 4px; font-weight:bold;",
 "color:#fff; background:#333; padding:3px 8px;",
 "color:#fff; background:#f57c00; padding:3px 8px; font-weight:bold;",
@@ -6355,12 +6333,7 @@ el.innerHTML = `
 ${CONF.logoSVG}
 <div style="display: inline-flex; align-items: baseline; gap: 10px;">
     <span style="font-weight: 700;">${L.title}</span>
-    <span style="font-size: 13px; font-weight: 600; color: var(--pk-fg); cursor: default;">
-            by <a href="https://github.com/digbug82/PikPak_Enhancement_Master" target="_blank" data-pk-tip="${L.tip_star_project}"
-                style="color: inherit; text-decoration: none; transition: color 0.2s; font-weight: inherit; cursor: pointer;"
-                onmouseover="this.style.color='var(--pk-pri)'"
-                onmouseout="this.style.color='inherit'">digbug82</a>
-    </span>
+    <span style="font-size: 12px; opacity: 0.6; cursor: default;">iPhone Edition</span>
 </div>
 </div>
 <div style="display:flex; gap:4px;">
@@ -6731,9 +6704,9 @@ return;
 
 let html = '';
 const usableThumb = thumb && thumb !== 'undefined' && thumb !== 'null' && (thumb.startsWith('http') || thumb.startsWith('blob:')) && !isPreviewIconFailed(thumb);
-if (usableThumb) {
+if (usableThumb && !isBlur) {
 const safeThumb = String(thumb).replace(/"/g, '&quot;');
-html += `<img data-pk-tooltip-thumb="${safeThumb}" src="${safeThumb}" style="${isBlur ? 'filter:blur(8px);' : ''}" onload="this.style.display='block'; this.style.marginBottom='6px';">`;
+html += `<img data-pk-tooltip-thumb="${safeThumb}" src="${safeThumb}" style="" onload="this.style.display='block'; this.style.marginBottom='6px';">`;
 }
 if (text) {
 html += `<div>${target.classList.contains('pk-share-history-title-tip') ? esc(text) : text}</div>`;
@@ -18502,7 +18475,7 @@ return `<div class="pk-max-icon-box" style="${boxStyle}"><div style="transform: 
 
 const mime = (item.mime_type || '').toLowerCase();
 const isMedia = item.kind !== 'drive#folder' && (mime.startsWith('image/') || mime.startsWith('video/') || (item.params && item.params.duration > 0));
-const hasRealThumb = isMedia && item.thumbnail_link && item.thumbnail_link !== item.icon_link;
+const hasRealThumb = isMedia && item.thumbnail_link && item.thumbnail_link !== item.icon_link && !isBlur;
 
 if (hasRealThumb) {
 if (!window.pkGlobalThumbCache) window.pkGlobalThumbCache = new Set();
@@ -40675,18 +40648,21 @@ let selectedIdmUrlExportType = curIdmUrlExportType;
 const storageStats = await calcLocalDataStats();
 const storageDisplay = fmtSize(storageStats.total);
 const settingsModalMaximized = !!(UI.win && UI.win.classList && UI.win.classList.contains('pk-maximized'));
-const settingsModalHeightStyle = settingsModalMaximized ? 'height:min(760px,90vh); max-height:calc(100vh - 56px);' : 'height:min(650px,84vh); max-height:calc(100vh - 80px);';
+const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const settingsModalHeightStyle = isMobile 
+    ? 'height:auto; max-height:calc(100vh - 120px);'
+    : (settingsModalMaximized ? 'height:min(760px,90vh); max-height:calc(100vh - 56px);' : 'height:min(650px,84vh); max-height:calc(100vh - 80px);');
 
 const m = showModal(`
-<div style="display:flex; flex-direction:column; ${settingsModalHeightStyle} width:640px; max-width:95vw; overflow:hidden; overscroll-behavior:none; position:relative;">
-<div style="padding: 30px 30px 15px 30px; flex-shrink:0; transform:translateZ(0);">
+<div class="pk-settings-modal-inner" style="display:flex; flex-direction:column; ${settingsModalHeightStyle} width:640px; max-width:95vw; overflow:hidden; overscroll-behavior:none; position:relative;">
+<div class="pk-settings-modal-header" style="padding: 30px 30px 15px 30px; flex-shrink:0; transform:translateZ(0);">
 <h3 style="margin: 0; font-size: 18px; font-weight: 700; border: none; line-height: 1.2; color: var(--pk-fg);">${L.modal_settings_title}</h3>
 </div>
 
-<div class="pk-scroll pk-no-scrollbar" style="flex:1; overflow-y:auto; padding: 10px 30px 20px 30px; overscroll-behavior:contain; transform:translateZ(0);">
+<div class="pk-settings-modal-body pk-scroll pk-no-scrollbar" style="flex:1; overflow-y:auto; padding: 10px 30px 20px 30px; overscroll-behavior:contain; transform:translateZ(0);">
 <div style="display:flex; flex-direction:column; gap:25px; padding-top:10px;">
 
-<div class="pk-custom-select" id="cs_set_lang" style="position:relative; z-index:30;">
+<div class="pk-custom-select" id="cs_set_lang" style="display:none !important;">
     <div class="pk-select-label">${L.label_lang}</div>
     <div class="pk-select-trigger"><span id="txt_set_lang"></span>${CONF.crumbIcons.down}</div>
     <div class="pk-select-menu pk-scroll" style="height:auto; max-height:none; overflow-y:hidden; overscroll-behavior:contain;">
@@ -42081,10 +42057,10 @@ const keys = Array.from(new Set([...(Array.isArray(gmKeys) ? gmKeys : []), ...ls
 
 const config = {
 "_pk_metadata": {
-"signature": "PIKPAK_ENHANCEMENT_MASTER",
+"signature": "PIKPAK_IPHONE_EDITION",
 "version": version,
 "export_at": new Date().toISOString(),
-"author": "digbug82",
+"author": "dchl311",
 "scope": "whitelist"
 }
 };
@@ -42261,7 +42237,7 @@ reader.onload = (ev) => {
 try {
 const config = JSON.parse(ev.target.result);
 
-if (!config._pk_metadata || config._pk_metadata.signature !== "PIKPAK_ENHANCEMENT_MASTER") {
+if (!config._pk_metadata || config._pk_metadata.signature !== "PIKPAK_IPHONE_EDITION") {
 throw new Error("INVALID_SIGNATURE");
 }
 
