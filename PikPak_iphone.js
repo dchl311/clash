@@ -2,7 +2,7 @@
 // @name               PikPak 增强大师 (iPhone版)
 // @name:zh-CN         PikPak 增强大师 (iPhone版)
 // @namespace          https://github.com/dchl311/
-// @version            3.1.4
+// @version            3.1.5
 // @author             dchl311
 // @license            AGPL-3.0-or-later
 // @description        PikPak 网盘增强：集成 Aria2/Gopeed/ABDM/IDM 下载、下载直链加速、下载过滤、分享链接解析增强、文件/文件夹查重、批量重命名、资源清理、批量解压、PotPlayer 直达、M3U 导出、排序与搜索增强、TXT 磁链提取、数据迁移、目录树导出、以图搜图、视音频播放增强等。
@@ -403,7 +403,7 @@ potplayerPromptCooldown: 10 * 60 * 1000,
 potplayerLikelyOpenTrustTTL: 24 * 60 * 60 * 1000,
 potplayerSuppressTodayTTL: 24 * 60 * 60 * 1000,
 potplayerPostRepairConfirmDelay: 6000,
-scriptUpdateManifestUrl: '',
+scriptUpdateManifestUrl: 'https://raw.githubusercontent.com/dchl311/clash/refs/heads/main/PikPak_iphone.js',
 scriptUpdateCheckTTL: 24 * 60 * 60 * 1000,
 scriptUpdateCacheKey: 'pk_script_update_cache',
 scriptUpdateDismissPrefix: 'pk_script_update_dismiss_',
@@ -1805,7 +1805,7 @@ function getScriptVersion(){try{return String((typeof GM_info!=='undefined'&&GM_
 function compareScriptVersion(a,b){const norm=v=>String(v||'0').replace(/^v/i,'').split(/[+-]/)[0].split('.').map(x=>parseInt(x,10)||0);const pa=norm(a),pb=norm(b);for(let i=0;i<Math.max(pa.length,pb.length,3);i++){const da=pa[i]||0,db=pb[i]||0;if(da!==db)return da>db?1:-1;}return 0;}
 function readScriptUpdateCache(){try{const raw=localStorage.getItem(CONF.scriptUpdateCacheKey);if(!raw)return null;const data=JSON.parse(raw);return data&&typeof data==='object'?data:null;}catch(e){return null;}}
 function writeScriptUpdateCache(data){try{localStorage.setItem(CONF.scriptUpdateCacheKey,JSON.stringify(data));}catch(e){}}
-async function fetchScriptUpdateInfo(force=false){const now=Date.now();const cached=readScriptUpdateCache();if(!force&&cached&&cached.checkedAt&&(now-cached.checkedAt)<CONF.scriptUpdateCheckTTL)return cached;if(!force&&pkScriptUpdateCheckPromise)return pkScriptUpdateCheckPromise;const job=(async()=>{let result={checkedAt:now,ok:false,latestVersion:'',homepage:CONF.scriptUpdateProjectUrl,changelog:'',error:''};try{const url=`${CONF.scriptUpdateManifestUrl}${CONF.scriptUpdateManifestUrl.includes('?')?'&':'?'}_t=${now}`;const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);const data=await res.json();const latestVersion=String(data.version||data.latestVersion||data.tag||'').replace(/^v/i,'').trim();if(!latestVersion)throw new Error('Empty version');result={checkedAt:now,ok:true,latestVersion,homepage:String(data.homepage||data.url||CONF.scriptUpdateProjectUrl),changelog:String(data.changelog||data.changelogUrl||''),error:''};}catch(e){result.error=e&&e.message?e.message:String(e||'');}writeScriptUpdateCache(result);return result;})();if(!force)pkScriptUpdateCheckPromise=job;try{return await job;}finally{if(pkScriptUpdateCheckPromise===job)pkScriptUpdateCheckPromise=null;}}
+async function fetchScriptUpdateInfo(force=false){const now=Date.now();const cached=readScriptUpdateCache();if(!force&&cached&&cached.checkedAt&&(now-cached.checkedAt)<CONF.scriptUpdateCheckTTL)return cached;if(!force&&pkScriptUpdateCheckPromise)return pkScriptUpdateCheckPromise;const job=(async()=>{let result={checkedAt:now,ok:false,latestVersion:'',homepage:CONF.scriptUpdateProjectUrl,changelog:'',error:''};try{if(!CONF.scriptUpdateManifestUrl)throw new Error('No update URL configured');const url=`${CONF.scriptUpdateManifestUrl}${CONF.scriptUpdateManifestUrl.includes('?')?'&':'?'}_t=${now}`;const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);let latestVersion='';if(CONF.scriptUpdateManifestUrl.includes('.js')){const text=await res.text();const match=text.match(/@version\s+(\S+)/);if(!match)throw new Error('Could not parse version');latestVersion=match[1].replace(/^v/i,'').trim();}else{const data=await res.json();latestVersion=String(data.version||data.latestVersion||data.tag||'').replace(/^v/i,'').trim();}if(!latestVersion)throw new Error('Empty version');result={checkedAt:now,ok:true,latestVersion,homepage:CONF.scriptUpdateProjectUrl,changelog:'',error:''};}catch(e){result.error=e&&e.message?e.message:String(e||'');}writeScriptUpdateCache(result);return result;})();if(!force)pkScriptUpdateCheckPromise=job;try{return await job;}finally{if(pkScriptUpdateCheckPromise===job)pkScriptUpdateCheckPromise=null;}}
 function isScriptUpdateNew(info){return !!(info&&info.ok&&info.latestVersion&&compareScriptVersion(info.latestVersion,getScriptVersion())>0);}
 function getScriptUpdateDismissKey(version){return `${CONF.scriptUpdateDismissPrefix}${String(version||'').replace(/[^0-9A-Za-z_.-]/g,'_')}`;}
 function isScriptUpdateDismissed(version){try{return localStorage.getItem(getScriptUpdateDismissKey(version))==='1';}catch(e){return false;}}
