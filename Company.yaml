@@ -16,6 +16,8 @@ payload:
   - DOMAIN-SUFFIX,123865.com
   - DOMAIN-SUFFIX,123pan.cn
   - DOMAIN-SUFFIX,123pan.com
+  - DOMAIN-SUFFIX,kia-forums.com
+  - DOMAIN-SUFFIX,loli.net
 # NAME: 京东
 
 payload:
