@@ -7,7 +7,7 @@
 #公司不让访问的国内媒体
 payload:
 
-
+  - DOMAIN-KEYWORD,bazuo.link
   - DOMAIN-KEYWORD,gitbook.io
   - DOMAIN-KEYWORD,leijing.xyz
   - DOMAIN-SUFFIX,gitbook.io
